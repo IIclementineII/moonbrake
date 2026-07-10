@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>月光值计算器 · 这个月这点钱,能吃什么玩什么?</title>
+<title>月光减速器 Moonbrake · 这个月这点钱,能吃什么玩什么?</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600;700&family=Space+Grotesk:wght@500;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script>
@@ -656,7 +656,7 @@
 <div class="wrap">
 
   <div class="hero">
-    <div class="brand-kicker">🌙 月光值计算器</div>
+    <div class="brand-kicker">🌙 月光减速器 · Moonbrake</div>
     <h1 class="brand">这个月这点钱,能吃什么<em>玩</em>什么?</h1>
     <p class="brand-sub">输入收支,一眼看懂这个月能潇洒到什么程度</p>
 
@@ -857,13 +857,13 @@
     <button class="share-btn" id="shareBtn">📸 生成分享图</button>
   </div>
 
-  <div class="footer-note">月光值计算器 · MVP 原型 · 数据仅存本地,不上传服务器</div>
+  <div class="footer-note">月光减速器 Moonbrake · MVP 原型 · 数据仅存本地,不上传服务器</div>
 </div>
 
 <!-- 分享卡（离屏渲染，用于截图） -->
 <div class="share-offscreen" id="shareOffscreen">
   <div class="share-card" id="shareCard">
-    <div class="sc-brand">🌙 月光值计算器</div>
+    <div class="sc-brand">🌙 月光减速器 Moonbrake</div>
     <div class="sc-number" id="scNumber">0</div>
     <div class="sc-label" id="scLabel">爽感指数</div>
     <div class="sc-daily" id="scDaily">每日温饱线 ¥0 / 天</div>
@@ -880,7 +880,7 @@
       </div>
       <span class="sg-pct" id="scGoalPct">0%</span>
     </div>
-    <div class="sc-footer" id="scFooter">月光值计算器 · 这个月这点钱,能吃什么玩什么?</div>
+    <div class="sc-footer" id="scFooter">月光减速器 Moonbrake · 这个月这点钱,能吃什么玩什么?</div>
   </div>
 </div>
 
@@ -889,7 +889,7 @@
   <div class="share-modal">
     <div id="shareModalBody" class="share-modal-loading">正在生成分享图...</div>
     <div class="share-modal-actions">
-      <a id="shareDownloadBtn" download="budget-to-barbecue.png" style="display:none;">⬇ 下载图片</a>
+      <a id="shareDownloadBtn" download="moonbrake.png" style="display:none;">⬇ 下载图片</a>
       <button id="shareCloseBtn">关闭</button>
     </div>
   </div>
@@ -963,6 +963,8 @@
   const STORE_KEY        = 'b2b_inputs_v4';
   const ACTIVE_KEY       = 'b2b_active_cards_v2';
   const CUSTOM_KEY       = 'b2b_custom_presets_v2';
+  const DEFAULT_PRESET_OVERRIDES_KEY = 'b2b_default_preset_overrides_v1';
+  const DELETED_DEFAULT_PRESETS_KEY  = 'b2b_deleted_default_presets_v1';
   const PRICE_OVERRIDE_KEY = 'b2b_price_overrides_v2';
   const COMPARE_HISTORY_KEY = 'b2b_compare_history_v1';
   const GOALS_KEY        = 'b2b_goals_v1';  // 多目标存储
@@ -1125,12 +1127,28 @@
     try{ const raw = localStorage.getItem(CUSTOM_KEY); return raw ? JSON.parse(raw) : []; }catch(e){ return []; }
   }
   function setCustomPresets(list){ try{ localStorage.setItem(CUSTOM_KEY, JSON.stringify(list)); }catch(e){} }
+  function getDefaultPresetOverrides(){
+    try{ const raw = localStorage.getItem(DEFAULT_PRESET_OVERRIDES_KEY); return raw ? JSON.parse(raw) : {}; }catch(e){ return {}; }
+  }
+  function setDefaultPresetOverrides(o){ try{ localStorage.setItem(DEFAULT_PRESET_OVERRIDES_KEY, JSON.stringify(o)); }catch(e){} }
+  function getDeletedDefaultPresetIds(){
+    try{ const raw = localStorage.getItem(DELETED_DEFAULT_PRESETS_KEY); return raw ? JSON.parse(raw) : []; }catch(e){ return []; }
+  }
+  function setDeletedDefaultPresetIds(ids){ try{ localStorage.setItem(DELETED_DEFAULT_PRESETS_KEY, JSON.stringify(ids)); }catch(e){} }
   function getPriceOverrides(){
     try{ const raw = localStorage.getItem(PRICE_OVERRIDE_KEY); return raw ? JSON.parse(raw) : {}; }catch(e){ return {}; }
   }
   function setPriceOverrides(o){ try{ localStorage.setItem(PRICE_OVERRIDE_KEY, JSON.stringify(o)); }catch(e){} }
 
-  function allPresets(){ return PRESET_POOL.concat(getCustomPresets()); }
+  function defaultPresets(){
+    const overrides = getDefaultPresetOverrides();
+    const deletedIds = getDeletedDefaultPresetIds();
+    return PRESET_POOL
+      .filter(p => !deletedIds.includes(p.id))
+      .map(p => overrides[p.id] ? {...p, ...overrides[p.id], id:p.id} : p);
+  }
+  function isDefaultPresetId(id){ return PRESET_POOL.some(p => p.id === id); }
+  function allPresets(){ return defaultPresets().concat(getCustomPresets()); }
   function presetById(id){ return allPresets().find(p => p.id === id); }
   function effectivePrice(preset){
     const overrides = getPriceOverrides();
@@ -1560,6 +1578,7 @@
     list.innerHTML = '';
     const activeIds = getActiveIds();
     const customIds = getCustomPresets().map(p => p.id);
+    const defaultIds = PRESET_POOL.map(p => p.id);
 
     if(pendingReplaceId){
       const newPreset = presetById(pendingReplaceId);
@@ -1578,13 +1597,14 @@
       const checked = activeIds.includes(p.id);
       row.className = 'editor-row' + (pendingReplaceId && checked ? ' replace-target' : '');
       const isCustom = customIds.includes(p.id);
+      const isDefault = defaultIds.includes(p.id);
       row.innerHTML = `
         <input type="checkbox" data-id="${p.id}" ${checked ? 'checked' : ''} ${pendingReplaceId ? 'style="pointer-events:none;opacity:0.4;"' : ''}>
         <span class="er-icon">${p.icon}</span>
         <span class="er-name">${p.name}</span>
         <span class="er-price">¥${effectivePrice(p)}/${p.unit}</span>
         ${pendingReplaceId && checked ? `<button class="er-replace-btn" data-id="${p.id}">⇄ 换成它</button>` : ''}
-        ${isCustom && !pendingReplaceId ? `
+        ${(isCustom || isDefault) && !pendingReplaceId ? `
           <span class="er-actions">
             <button type="button" class="er-edit-btn" data-id="${p.id}">编辑</button>
             <button type="button" class="er-del-btn" data-id="${p.id}">删除</button>
@@ -1646,9 +1666,18 @@
     list.querySelectorAll('.er-del-btn').forEach(btn => {
       btn.addEventListener('click', async (e) => {
         e.stopPropagation();
-        if(!(await appConfirm('删除这个自定义场景?'))) return;
         const id = btn.dataset.id;
-        setCustomPresets(getCustomPresets().filter(p => p.id !== id));
+        const isDefault = isDefaultPresetId(id);
+        if(!(await appConfirm(isDefault ? '删除这个默认场景? 删除后会从列表中隐藏。' : '删除这个自定义场景?'))) return;
+        if(isDefault){
+          const deleted = getDeletedDefaultPresetIds();
+          if(!deleted.includes(id)) setDeletedDefaultPresetIds(deleted.concat(id));
+          const defaultOverrides = getDefaultPresetOverrides();
+          delete defaultOverrides[id];
+          setDefaultPresetOverrides(defaultOverrides);
+        } else {
+          setCustomPresets(getCustomPresets().filter(p => p.id !== id));
+        }
         setActiveIds(getActiveIds().filter(x => x !== id));
         const overrides = getPriceOverrides();
         delete overrides[id];
@@ -1671,7 +1700,7 @@
   const UNIT_PRESETS = ['次','顿','杯','份','件','场','人次','月','年'];
   function getCfUnitValue(){
     const sel = $('cfUnit').value;
-    if(sel === '__custom__') return $('cfUnitCustom').value.trim() || '次';
+    if(sel === '__custom__') return $('cfUnitCustom').value.trim();
     return sel;
   }
   function setCfUnitValue(unit){
@@ -1691,10 +1720,12 @@
   });
 
   /* P1 校验：禁止负数/0价格/空名称，名称限20字符(兼容Emoji)，支持编辑/删除 */
-  function validateCustomForm(name, price){
+  function validateCustomForm(name, price, unit){
     if(!name) return '场景名称不能为空';
     if(Array.from(name).length > 20) return '名称最多20个字符';
     if(isNaN(price) || price <= 0) return '价格必须大于0';
+    if(!unit) return '单位不能为空';
+    if(Array.from(unit).length > 6) return '单位最多6个字符';
     return '';
   }
 
@@ -1706,7 +1737,7 @@
     const name  = $('cfName').value.trim();
     const price = +$('cfPrice').value;
     const unit  = getCfUnitValue();
-    const err = validateCustomForm(name, price);
+    const err = validateCustomForm(name, price, unit);
     const errEl = $('cfFormError');
     if(err){
       errEl.textContent = err;
@@ -1717,14 +1748,23 @@
 
     const editingId = $('addCustomBtn').dataset.editing;
     if(editingId){
-      const customs = getCustomPresets();
-      const idx = customs.findIndex(p => p.id === editingId);
-      if(idx !== -1){
-        customs[idx] = {...customs[idx], icon, name, price, unit};
-        setCustomPresets(customs);
+      if(isDefaultPresetId(editingId)){
+        const defaultOverrides = getDefaultPresetOverrides();
+        defaultOverrides[editingId] = {icon, name, price, unit};
+        setDefaultPresetOverrides(defaultOverrides);
         const overrides = getPriceOverrides();
         delete overrides[editingId]; // 价格以编辑值为准
         setPriceOverrides(overrides);
+      } else {
+        const customs = getCustomPresets();
+        const idx = customs.findIndex(p => p.id === editingId);
+        if(idx !== -1){
+          customs[idx] = {...customs[idx], icon, name, price, unit};
+          setCustomPresets(customs);
+          const overrides = getPriceOverrides();
+          delete overrides[editingId]; // 价格以编辑值为准
+          setPriceOverrides(overrides);
+        }
       }
       delete $('addCustomBtn').dataset.editing;
       $('addCustomBtn').textContent = '+ 添加';
