@@ -1,4 +1,5 @@
 Moonbrake 🌙
+
 项目介绍
 这是一个极简的月度预算管理与消费警示工具。通过可视化的方式，帮你给消费习惯“减速”，让你在每一笔开支前多一秒的思考，掌控财务自由。我们相信，理财不仅仅是数字的堆砌，更是对生活节奏的重新掌控。
 
@@ -18,7 +19,7 @@ Moonbrake 🌙
 
 消费录入： 随时添加消费项，系统会自动计算剩余可用金额并给出警示提醒。
 
-生成报告： 当月消费记录完成，点击“生成月度报告”按钮，即可保存海报以便分享至社交媒体。
+生成报告： 当月消费记录完成，点击“生成分享图”按钮，即可保存海报以便分享至社交媒体。
 
 版权与引用声明
 本项目基于 MIT 开源协议发布。如果你在开发过程中需要引用、借鉴或搬用本项目的代码，请务必遵守以下条款：
@@ -40,7 +41,7 @@ Moonbrake 🌙
 
 关于作者
 作者： IIclementineII
-项目主页： [在此处粘贴你的 GitHub 仓库链接]
+项目主页： [https://github.com/IIclementineII/moonbrake]
 
 Moonbrake 🌙
 Introduction
@@ -62,7 +63,7 @@ Setup Budget: Input your total monthly budget at the top of the interface to ser
 
 Log Expenses: Add your expenses in real-time, and the system will automatically calculate your remaining budget and provide warnings.
 
-Generate Report: Once your monthly recording is complete, click the "Generate Monthly Report" button to save your personalized poster for sharing.
+Generate Report: Once your monthly recording is complete, click the "Generate a shareable image" button to save your personalized poster for sharing.
 
 License & Attribution
 This project is released under the MIT License. If you use, borrow, or redistribute the code from this project, you must comply with the following:
@@ -84,4 +85,4 @@ Data Export: Supporting CSV or JSON exports for convenient backup and profession
 
 About the Author
 Author: IIclementineII
-Repository: [Paste your GitHub repository link here]
+Repository: [https://github.com/IIclementineII/moonbrake]
