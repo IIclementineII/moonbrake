@@ -1,88 +1,87 @@
-Moonbrake 🌙
+# Moonbrake 🌙
 
-项目介绍
-这是一个极简的月度预算管理与消费警示工具。通过可视化的方式，帮你给消费习惯“减速”，让你在每一笔开支前多一秒的思考，掌控财务自由。我们相信，理财不仅仅是数字的堆砌，更是对生活节奏的重新掌控。
+<div align="center">
 
-核心功能
-零依赖架构： 核心库已内嵌，无需担心 CDN 网络延迟或外部服务中断。
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Language: HTML/JS](https://img.shields.io/badge/Language-HTML%2FJS-blue.svg)]()
+[![Status: Active](https://img.shields.io/badge/Status-Active-brightgreen.svg)]()
 
-即时可视化： 内置 html2canvas 截图功能，一键生成美观的消费总结海报。
+**给生活按个“暂停键”，掌控你的财务自由。**  
+*Take a "brake" from overspending, and take control of your financial freedom.*
 
-移动端优先： 响应式布局，完美适配各种尺寸的移动设备，随时随地记录财务状况。
+[中文](#项目介绍) | [English](#introduction)
 
-隐私安全： 所有计算与数据处理均在浏览器本地完成，不会将你的财务隐私上传至任何服务器。
+</div>
 
-使用说明
-启动应用： 将项目下载至本地，直接通过浏览器打开 index.html 即可开始使用，无需复杂的配置。
+---
 
-预算配置： 在页面顶部输入你本月的预算总额，系统将以此为基准进行监控。
+## 🇨🇳 <a id="项目介绍"></a>项目介绍
 
-消费录入： 随时添加消费项，系统会自动计算剩余可用金额并给出警示提醒。
+**Moonbrake** 是一个极简、轻量且隐私优先的月度预算管理工具。通过可视化的方式，帮你给消费习惯“减速”，让你在每一笔开支前多一秒的思考。
 
-生成报告： 当月消费记录完成，点击“生成分享图”按钮，即可保存海报以便分享至社交媒体。
+### 核心亮点 ✨
+> **零依赖 · 本地化 · 移动端优先**
 
-版权与引用声明
-本项目基于 MIT 开源协议发布。如果你在开发过程中需要引用、借鉴或搬用本项目的代码，请务必遵守以下条款：
+*   **⚡️ 零依赖架构：** 核心库已内嵌，无需 CDN，断网也能飞快运行。
+*   **📸 即时可视化：** 一键生成美观的消费总结海报，社交媒体打卡必备。
+*   **📱 响应式布局：** 适配各类移动设备，随时随地掌握你的财务状况。
+*   **🔒 极致隐私：** 所有数据仅存储于浏览器本地，你的财务隐私绝不上传。
 
-必须保留署名： 必须明确标注作者名字为 IIclementineII。
+### 🚀 使用指南
+1. **启动：** 下载项目并打开 `index.html`。
+2. **配置：** 输入本月预算总额。
+3. **记录：** 录入开支，系统实时计算结余并预警。
+4. **分享：** 点击“生成分享图”，保存并分享你的自律时刻。
 
-必须附带链接： 必须在你的项目显著位置提供指向本原始 GitHub 仓库的跳转链接。
+---
 
-路线图与持续更新
-本项目处于积极的迭代开发阶段，我们将持续为您带来以下功能更新：
+## 🇺🇸 <a id="introduction"></a>Introduction
 
-数据持久化： 集成 localStorage 技术，确保即便在关闭浏览器后，你的数据也能被保存。
+**Moonbrake** is a minimalist, lightweight, and privacy-focused budget management tool. It helps you "brake" your spending habits through visualization, encouraging a moment of reflection before every purchase.
 
-高级数据分析： 引入图表库，通过饼图和折线图展示你的消费结构与趋势。
+### Key Features ✨
+> **Zero-Dependency · Local-First · Mobile-First**
 
-多币种支持： 增加对多种主流货币的转换与适配。
+*   **⚡️ Zero-Dependency:** Core libraries are embedded; no concerns about CDN latency or downtime.
+*   **📸 Instant Visualization:** Generate beautiful expense report posters with a single click.
+*   **📱 Mobile-First:** Responsive layout optimized for all mobile devices.
+*   **🔒 Privacy-Focused:** All data processing occurs locally in your browser. Your data, your rules.
 
-导出功能： 支持将财务数据导出为 CSV 或 JSON 格式，方便在 Excel 中进行深度备份。
+### 🚀 How to Use
+1. **Launch:** Open `index.html` in your browser.
+2. **Budget:** Set your total monthly budget.
+3. **Log:** Track your expenses in real-time.
+4. **Share:** Click "Generate a shareable image" to showcase your progress.
 
-关于作者
-作者： IIclementineII
-项目主页： [https://github.com/IIclementineII/moonbrake]
+---
 
-Moonbrake 🌙
-Introduction
-Moonbrake is a minimalist monthly budget management and consumption warning tool. It helps you "brake" your spending habits through visualization, encouraging a moment of reflection before every purchase to help you take control of your financial freedom. We believe that personal finance is not just about numbers, but about reclaiming control over your life's pace.
+## ⚖️ 版权与协议 | License & Attribution
 
-Key Features
-Zero-Dependency Architecture: Core libraries are embedded; no concerns about CDN latency or external service disruptions.
+本项目采用 **MIT License** 开源。如果你引用、借鉴或搬用代码，请务必遵守以下条款：
 
-Instant Visualization: Built-in html2canvas functionality allows you to generate beautiful, shareable expense report posters with a single click.
+*   **👤 必须署名：** 请标注原作者为 **IIclementineII**。
+*   **🔗 附带链接：** 必须在项目显著位置提供 [原 GitHub 仓库链接](https://github.com/IIclementineII/moonbrake)。
 
-Mobile-First Design: A fully responsive layout optimized for all mobile devices, ensuring you can manage your finances anytime, anywhere.
+*This project is released under the **MIT License**. If you use, borrow, or redistribute the code, you must credit the author (**IIclementineII**) and include a link to the [original GitHub repository](https://github.com/IIclementineII/moonbrake).*
 
-Privacy-Focused: All data processing occurs locally within your browser, ensuring your financial information is never uploaded to any server.
+---
 
-How to Use
-Launch: Download the project and open index.html in your browser. No complex setup or installation is required.
+## 🛠 未来计划 | Future Roadmap
 
-Setup Budget: Input your total monthly budget at the top of the interface to serve as your benchmark.
+| 功能 (Feature) | 状态 (Status) |
+| :--- | :--- |
+| **数据持久化 (localStorage)** | ⏳ In Progress |
+| **高级图表分析 (Charts)** | 📅 Planned |
+| **多币种支持 (Multi-currency)** | 📅 Planned |
+| **数据导出 (Export CSV/JSON)** | 📅 Planned |
 
-Log Expenses: Add your expenses in real-time, and the system will automatically calculate your remaining budget and provide warnings.
+---
 
-Generate Report: Once your monthly recording is complete, click the "Generate a shareable image" button to save your personalized poster for sharing.
+## 📬 联系作者 | Contact
 
-License & Attribution
-This project is released under the MIT License. If you use, borrow, or redistribute the code from this project, you must comply with the following:
+*   **Author:** IIclementineII
+*   **Repository:** [https://github.com/IIclementineII/moonbrake](https://github.com/IIclementineII/moonbrake)
 
-Mandatory Attribution: You must clearly credit the original author, IIclementineII.
-
-Link Requirement: You must provide a clickable link to the original GitHub repository in a prominent location within your project.
-
-Future Roadmap
-This project is under active development. Upcoming features include:
-
-Data Persistence: Integration of localStorage to ensure your data remains saved even after closing the browser.
-
-Advanced Analytics: Introduction of charts (pie/line graphs) to analyze your spending structure and trends.
-
-Multi-Currency Support: Adapting the interface to support various global currencies.
-
-Data Export: Supporting CSV or JSON exports for convenient backup and professional analysis in Excel.
-
-About the Author
-Author: IIclementineII
-Repository: [https://github.com/IIclementineII/moonbrake]
+<div align="center">
+  <sub>Built with ❤️ by IIclementineII | © 2026</sub>
+</div>
