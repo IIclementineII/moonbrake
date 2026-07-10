@@ -15,6 +15,10 @@
 
 ---
 
+<div align="center">
+  <img src="preview.png" alt="Moonbrake Preview" width="600">
+</div>
+
 ## 🇨🇳 <a id="项目介绍"></a>项目介绍
 
 **Moonbrake** 是一个极简、轻量且隐私优先的月度预算管理工具。通过可视化的方式，帮你给消费习惯“减速”，让你在每一笔开支前多一秒的思考。
