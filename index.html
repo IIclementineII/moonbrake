@@ -59,7 +59,17 @@
   .wrap{ max-width: 680px; margin: 0 auto; }
 
   /* ---------- HERO ---------- */
-  .hero{ text-align:center; padding: 4px 0 32px; }
+  .hero{ text-align:center; padding: 4px 0 32px; position:relative; }
+  .lang-toggle-row{ display:flex; justify-content:center; margin-bottom:14px; }
+  .lang-toggle-btn{
+    display:inline-flex; align-items:center; gap:0; font-size:12px; font-weight:600;
+    background: var(--card-soft); border:1px solid var(--border); border-radius:99px;
+    padding:3px; cursor:pointer; font-family: var(--font-cn);
+  }
+  .lang-toggle-btn span{
+    padding:5px 12px; border-radius:99px; color: var(--ink-faint); transition: all 0.15s ease;
+  }
+  .lang-toggle-btn span.active{ background: var(--clay); color:#fff; }
   .brand-kicker{
     display:inline-block; font-size:12px; font-weight:600; letter-spacing:0.04em;
     color: var(--clay); background: var(--clay-tint); border-radius:99px;
@@ -656,9 +666,14 @@
 <div class="wrap">
 
   <div class="hero">
-    <div class="brand-kicker">🌙 月光减速器 · Moonbrake</div>
-    <h1 class="brand">这个月这点钱,能吃什么<em>玩</em>什么?</h1>
-    <p class="brand-sub">输入收支,一眼看懂这个月能潇洒到什么程度</p>
+    <div class="lang-toggle-row">
+      <button class="lang-toggle-btn" id="langToggleBtn" type="button">
+        <span id="langZh" class="active">中文</span><span id="langEn">EN</span>
+      </button>
+    </div>
+    <div class="brand-kicker" data-i18n="brandKicker">🌙 月光减速器 · Moonbrake</div>
+    <h1 class="brand" data-i18n-html="brandTitleHtml">这个月这点钱,能吃什么<em>玩</em>什么?</h1>
+    <p class="brand-sub" data-i18n="brandSub">输入收支,一眼看懂这个月能潇洒到什么程度</p>
 
     <div class="hero-number" id="heroBig">0</div>
     <div class="hero-unit" id="heroLabel">爽感指数</div>
@@ -672,8 +687,8 @@
   <!-- ANALYSIS -->
   <div class="card" id="analysisCard">
     <div class="card-title">
-      <h2>本月分析</h2>
-      <span class="hint">自动生成,可截图分享</span>
+      <h2 data-i18n="analysisTitle">本月分析</h2>
+      <span class="hint" data-i18n="analysisHint">自动生成,可截图分享</span>
     </div>
     <div id="analysisBody"></div>
   </div>
@@ -681,118 +696,118 @@
   <!-- INPUTS -->
   <div class="card">
     <div class="card-title">
-      <h2>收支录入</h2>
-      <span class="hint">滑块拖动 或 直接输入金额</span>
+      <h2 data-i18n="inputsTitle">收支录入</h2>
+      <span class="hint" data-i18n="inputsHint">滑块拖动 或 直接输入金额</span>
     </div>
 
     <!-- 每个 field 都有：滑块 + 右上角数字直输框 -->
     <div class="field">
       <div class="field-label">
-        <span>月收入 / 生活费</span>
+        <span data-i18n="labelIncome">月收入 / 生活费</span>
         <div class="field-right">
           <input class="fine-input" type="number" id="incomeNum" min="0" max="50000" step="100" value="5000">
-          <span style="font-size:12px;color:var(--ink-faint);">元</span>
+          <span style="font-size:12px;color:var(--ink-faint);" data-i18n="unitYuan">元</span>
         </div>
       </div>
       <input type="range" id="income" min="0" max="20000" step="100" value="5000">
-      <div class="range-overflow-hint" id="incomeHint">已超出滑块范围,以数字为准</div>
+      <div class="range-overflow-hint" id="incomeHint" data-i18n="overflowHint">已超出滑块范围,以数字为准</div>
     </div>
     <div class="field">
       <div class="field-label">
-        <span>房租(含物业费)</span>
+        <span data-i18n="labelRent">房租(含物业费)</span>
         <div class="field-right">
           <input class="fine-input" type="number" id="rentNum" min="0" max="20000" step="50" value="1500">
-          <span style="font-size:12px;color:var(--ink-faint);">元</span>
+          <span style="font-size:12px;color:var(--ink-faint);" data-i18n="unitYuan">元</span>
         </div>
       </div>
       <input type="range" id="rent" min="0" max="8000" step="50" value="1500">
-      <div class="range-overflow-hint" id="rentHint">已超出滑块范围,以数字为准</div>
+      <div class="range-overflow-hint" id="rentHint" data-i18n="overflowHint">已超出滑块范围,以数字为准</div>
     </div>
     <div class="field">
       <div class="field-label">
-        <span>水电燃气</span>
+        <span data-i18n="labelUtil">水电燃气</span>
         <div class="field-right">
           <input class="fine-input" type="number" id="utilNum" min="0" max="5000" step="10" value="150">
-          <span style="font-size:12px;color:var(--ink-faint);">元</span>
+          <span style="font-size:12px;color:var(--ink-faint);" data-i18n="unitYuan">元</span>
         </div>
       </div>
       <input type="range" id="util" min="0" max="800" step="10" value="150">
-      <div class="range-overflow-hint" id="utilHint">已超出滑块范围,以数字为准</div>
+      <div class="range-overflow-hint" id="utilHint" data-i18n="overflowHint">已超出滑块范围,以数字为准</div>
     </div>
     <div class="field">
       <div class="field-label">
-        <span>通勤费</span>
+        <span data-i18n="labelCommute">通勤费</span>
         <div class="field-right">
           <input class="fine-input" type="number" id="commuteNum" min="0" max="5000" step="10" value="100">
-          <span style="font-size:12px;color:var(--ink-faint);">元</span>
+          <span style="font-size:12px;color:var(--ink-faint);" data-i18n="unitYuan">元</span>
         </div>
       </div>
       <input type="range" id="commute" min="0" max="1000" step="10" value="100">
-      <div class="range-overflow-hint" id="commuteHint">已超出滑块范围,以数字为准</div>
+      <div class="range-overflow-hint" id="commuteHint" data-i18n="overflowHint">已超出滑块范围,以数字为准</div>
     </div>
     <div class="field">
       <div class="field-label">
-        <span>话费流量</span>
+        <span data-i18n="labelPhone">话费流量</span>
         <div class="field-right">
           <input class="fine-input" type="number" id="phoneNum" min="0" max="5000" step="10" value="99">
-          <span style="font-size:12px;color:var(--ink-faint);">元</span>
+          <span style="font-size:12px;color:var(--ink-faint);" data-i18n="unitYuan">元</span>
         </div>
       </div>
       <input type="range" id="phone" min="0" max="300" step="10" value="99">
-      <div class="range-overflow-hint" id="phoneHint">已超出滑块范围,以数字为准</div>
+      <div class="range-overflow-hint" id="phoneHint" data-i18n="overflowHint">已超出滑块范围,以数字为准</div>
     </div>
     <div class="field">
       <div class="field-label">
-        <span>其他固定支出(健身/会员等)</span>
+        <span data-i18n="labelOther">其他固定支出(健身/会员等)</span>
         <div class="field-right">
           <input class="fine-input" type="number" id="otherNum" min="0" max="5000" step="10" value="50">
-          <span style="font-size:12px;color:var(--ink-faint);">元</span>
+          <span style="font-size:12px;color:var(--ink-faint);" data-i18n="unitYuan">元</span>
         </div>
       </div>
       <input type="range" id="other" min="0" max="1000" step="10" value="50">
-      <div class="range-overflow-hint" id="otherHint">已超出滑块范围,以数字为准</div>
+      <div class="range-overflow-hint" id="otherHint" data-i18n="overflowHint">已超出滑块范围,以数字为准</div>
     </div>
     <div class="reset-row">
-      <button class="reset-btn" id="resetBtn">↺ 恢复默认预算</button>
+      <button class="reset-btn" id="resetBtn" data-i18n="resetBtn">↺ 恢复默认预算</button>
     </div>
-    <div style="text-align:center; font-size:11px; color:var(--ink-faint); margin-top:8px;">仅重置上面这6项收支数字,长期目标 / 对比方案 / 自定义消费卡不受影响</div>
+    <div style="text-align:center; font-size:11px; color:var(--ink-faint); margin-top:8px;" data-i18n="resetNote">仅重置上面这6项收支数字,长期目标 / 对比方案 / 自定义消费卡不受影响</div>
   </div>
 
   <!-- INDEX GRID -->
   <div class="card">
     <div class="card-title">
-      <h2>生活质量换算</h2>
+      <h2 data-i18n="indexTitle">生活质量换算</h2>
       <div style="display:flex; align-items:center; gap:10px;">
-        <span class="hint">可支配资金 ¥<span id="disposable">0</span></span>
-        <button class="edit-btn" id="editCardsBtn">编辑</button>
+        <span class="hint"><span data-i18n="disposableLabel">可支配资金</span> <span id="disposableCur">¥</span><span id="disposable">0</span></span>
+        <button class="edit-btn" id="editCardsBtn" data-i18n="editBtn">编辑</button>
       </div>
     </div>
 
     <div class="editor-panel" id="editorPanel">
-      <div class="editor-note">最多选4个,勾选即生效;下面也可以添加自定义场景</div>
+      <div class="editor-note" data-i18n="editorNote">最多选4个,勾选即生效;下面也可以添加自定义场景</div>
       <div class="editor-list" id="editorList"></div>
       <div class="custom-form">
         <input id="cfIcon" placeholder="🍕" maxlength="4">
-        <input id="cfName" placeholder="场景名称,如'健身房单次'" maxlength="20">
-        <input id="cfPrice" type="number" placeholder="单价" min="0.01" step="0.01" max="100000">
+        <input id="cfName" data-i18n-ph="cfNamePh" placeholder="场景名称,如'健身房单次'" maxlength="20">
+        <input id="cfPrice" type="number" data-i18n-ph="cfPricePh" placeholder="单价" min="0.01" step="0.01" max="100000">
         <select id="cfUnit" class="select-nice">
-          <option value="次">次</option>
-          <option value="顿">顿</option>
-          <option value="杯">杯</option>
-          <option value="份">份</option>
-          <option value="件">件</option>
-          <option value="场">场</option>
-          <option value="人次">人次</option>
-          <option value="月">月</option>
-          <option value="年">年</option>
-          <option value="__custom__">其他…</option>
+          <option value="次" data-i18n="unit_次">次</option>
+          <option value="顿" data-i18n="unit_顿">顿</option>
+          <option value="杯" data-i18n="unit_杯">杯</option>
+          <option value="份" data-i18n="unit_份">份</option>
+          <option value="件" data-i18n="unit_件">件</option>
+          <option value="场" data-i18n="unit_场">场</option>
+          <option value="人次" data-i18n="unit_人次">人次</option>
+          <option value="月" data-i18n="unit_月">月</option>
+          <option value="年" data-i18n="unit_年">年</option>
+          <option value="__custom__" data-i18n="unit_other">其他…</option>
         </select>
-        <input id="cfUnitCustom" placeholder="自定义单位" maxlength="6" style="display:none;">
-        <button class="add-btn" id="addCustomBtn">+ 添加</button>
+        <input id="cfUnitCustom" data-i18n-ph="cfUnitCustomPh" placeholder="自定义单位" maxlength="6" style="display:none;">
+        <button class="add-btn" id="addCustomBtn" data-i18n="addBtn">+ 添加</button>
       </div>
       <div class="form-error" id="cfFormError"></div>
       <div class="editor-actions">
-        <button class="apply-btn" id="applyEditorBtn">完成</button>
+        <button class="apply-btn" id="applyEditorBtn" data-i18n="applyBtn">完成</button>
       </div>
     </div>
 
@@ -802,8 +817,8 @@
   <!-- WHAT IF -->
   <div class="card">
     <div class="card-title">
-      <h2>🔮 假设分析 What If</h2>
-      <span class="hint">跟随上面滑块实时变化</span>
+      <h2 data-i18n="whatifTitle">🔮 假设分析 What If</h2>
+      <span class="hint" data-i18n="whatifHint">跟随上面滑块实时变化</span>
     </div>
     <div class="whatif-grid" id="whatifGrid"></div>
   </div>
@@ -811,22 +826,22 @@
   <!-- COMPARE -->
   <div class="card">
     <div class="card-title" id="compareToggleRow" style="cursor:pointer;">
-      <h2>租房对比模拟</h2>
+      <h2 data-i18n="compareTitle">租房对比模拟</h2>
       <div class="toggle-row">
-        <span class="hint" id="compareHint">关闭</span>
+        <span class="hint" id="compareHint" data-i18n="toggleOff">关闭</span>
         <div class="toggle" id="compareToggle"></div>
       </div>
     </div>
     <div class="compare-body" id="compareBody">
       <div class="compare-history-row">
-        <select id="compareHistorySelect" class="select-nice"><option value="">-- 历史方案组 --</option></select>
-        <button id="compareSaveBtn">💾 保存当前</button>
-        <button id="compareDeleteBtn">🗑 删除</button>
+        <select id="compareHistorySelect" class="select-nice"><option value="" data-i18n="historyPlaceholder">-- 历史方案组 --</option></select>
+        <button id="compareSaveBtn" data-i18n="saveCurrentBtn">💾 保存当前</button>
+        <button id="compareDeleteBtn" data-i18n="deleteBtn">🗑 删除</button>
       </div>
       <div class="compare-cols" id="compareCols"></div>
       <div class="compare-result">
-        <div class="headline" id="crHeadline">多花房租,相当于少吃几顿烧烤</div>
-        <div class="idx-diff" id="crIndex">爽感指数差 -- 点</div>
+        <div class="headline" id="crHeadline" data-i18n="crHeadlineDefault">多花房租,相当于少吃几顿烧烤</div>
+        <div class="idx-diff" id="crIndex" data-i18n="crIndexDefault">爽感指数差 -- 点</div>
         <div class="cr-items" id="crItems"></div>
       </div>
     </div>
@@ -835,17 +850,17 @@
   <!-- GOAL MULTI-CARD -->
   <div class="card goal-section">
     <div class="goal-section-title">
-      <h2>长期目标</h2>
-      <button class="goal-add-btn" id="goalAddBtn">＋ 新增目标</button>
+      <h2 data-i18n="goalTitle">长期目标</h2>
+      <button class="goal-add-btn" id="goalAddBtn" data-i18n="goalAddBtn">＋ 新增目标</button>
     </div>
 
     <!-- 公共月存款池 -->
     <div class="goal-monthly-pool">
-      <label>每月可存款总额</label>
+      <label data-i18n="poolLabel">每月可存款总额</label>
       <input type="number" id="poolSave" value="800" min="0" step="100">
-      <span style="font-size:13px;color:var(--ink-soft);flex-shrink:0;">元 / 月</span>
+      <span style="font-size:13px;color:var(--ink-soft);flex-shrink:0;" data-i18n="poolUnit">元 / 月</span>
       <input type="range" id="poolSaveRange" min="0" max="10000" step="100" value="800" style="flex-basis:100%;">
-      <div class="range-overflow-hint" id="poolSaveHint" style="flex-basis:100%;">已超出滑块范围,以数字为准</div>
+      <div class="range-overflow-hint" id="poolSaveHint" style="flex-basis:100%;" data-i18n="overflowHint">已超出滑块范围,以数字为准</div>
       <div class="pool-hint" id="poolHint">将按各目标优先级比例自动分配到每个目标</div>
     </div>
 
@@ -854,10 +869,10 @@
   </div>
 
   <div class="share-btn-row">
-    <button class="share-btn" id="shareBtn">📸 生成分享图</button>
+    <button class="share-btn" id="shareBtn" data-i18n="shareBtn">📸 生成分享图</button>
   </div>
 
-  <div class="footer-note">月光减速器 Moonbrake · MVP 原型 · 数据仅存本地,不上传服务器</div>
+  <div class="footer-note" data-i18n="footerNote">月光减速器 Moonbrake · MVP 原型 · 数据仅存本地,不上传服务器</div>
 </div>
 
 <!-- 分享卡（离屏渲染，用于截图） -->
@@ -887,10 +902,10 @@
 <!-- 分享图预览弹层 -->
 <div class="share-modal-mask" id="shareModalMask">
   <div class="share-modal">
-    <div id="shareModalBody" class="share-modal-loading">正在生成分享图...</div>
+    <div id="shareModalBody" class="share-modal-loading" data-i18n="shareLoading">正在生成分享图...</div>
     <div class="share-modal-actions">
-      <a id="shareDownloadBtn" download="moonbrake.png" style="display:none;">⬇ 下载图片</a>
-      <button id="shareCloseBtn">关闭</button>
+      <a id="shareDownloadBtn" download="moonbrake.png" style="display:none;" data-i18n="downloadImgBtn">⬇ 下载图片</a>
+      <button id="shareCloseBtn" data-i18n="closeBtn">关闭</button>
     </div>
   </div>
 </div>
@@ -901,14 +916,228 @@
     <div class="am-msg" id="amMsg"></div>
     <input id="amInput" style="display:none;">
     <div class="am-actions">
-      <button class="am-cancel" id="amCancelBtn" style="display:none;">取消</button>
-      <button class="am-ok" id="amOkBtn">好</button>
+      <button class="am-cancel" id="amCancelBtn" style="display:none;" data-i18n="cancelBtn">取消</button>
+      <button class="am-ok" id="amOkBtn" data-i18n="okBtn">好</button>
     </div>
   </div>
 </div>
 
 <script>
   const $ = id => document.getElementById(id);
+
+  /* ============================================================
+     双语支持 (i18n)
+  ============================================================ */
+  const LANG_KEY = 'b2b_lang_v1';
+  let currentLang = (function(){
+    try{ return localStorage.getItem(LANG_KEY) || 'zh'; }catch(e){ return 'zh'; }
+  })();
+  function isEn(){ return currentLang === 'en'; }
+
+  const DICT = {
+    zh: {
+      brandKicker: '🌙 月光减速器 · Moonbrake',
+      brandTitleHtml: '这个月这点钱,能吃什么<em>玩</em>什么?',
+      brandSub: '输入收支,一眼看懂这个月能潇洒到什么程度',
+      heroLabelDefault: '爽感指数',
+      brokeBannerDefault: '暂无预算',
+      emptyDailyLine: '还没填数据,填一下上面的收支就能看到分析啦',
+      dailyLineUnder1: '每日温饱线 不足¥1 / 天',
+      emptyBrokeBanner: '暂无预算 —— 填一下收支就能看到这个月的生活质量分析',
+      brokeBannerMsg: '房租水电已经花光收入了 —— 这个月得吃土了,建议重新看看房租那一档',
+      eatingDirtMode: '吃土进行时',
+      analysisTitle: '本月分析',
+      analysisHint: '自动生成,可截图分享',
+      inputsTitle: '收支录入',
+      inputsHint: '滑块拖动 或 直接输入金额',
+      labelIncome: '月收入 / 生活费',
+      labelRent: '房租(含物业费)',
+      labelUtil: '水电燃气',
+      labelCommute: '通勤费',
+      labelPhone: '话费流量',
+      labelOther: '其他固定支出(健身/会员等)',
+      unitYuan: '元',
+      overflowHint: '已超出滑块范围,以数字为准',
+      resetBtn: '↺ 恢复默认预算',
+      resetNote: '仅重置上面这6项收支数字,长期目标 / 对比方案 / 自定义消费卡不受影响',
+      indexTitle: '生活质量换算',
+      disposableLabel: '可支配资金',
+      editBtn: '编辑',
+      deleteBtn: '删除',
+      editorNote: '最多选4个,勾选即生效;下面也可以添加自定义场景',
+      cfNamePh: "场景名称,如'健身房单次'",
+      cfPricePh: '单价',
+      cfUnitCustomPh: '自定义单位',
+      addBtn: '+ 添加',
+      saveEditBtn: '保存修改',
+      applyBtn: '完成',
+      whatifTitle: '🔮 假设分析 What If',
+      whatifHint: '跟随上面滑块实时变化',
+      compareTitle: '租房对比模拟',
+      toggleOff: '关闭',
+      toggleOn: '开启',
+      historyPlaceholder: '-- 历史方案组 --',
+      saveCurrentBtn: '💾 保存当前',
+      crHeadlineDefault: '多花房租,相当于少吃几顿烧烤',
+      crIndexDefault: '爽感指数差 -- 点',
+      crPerMonthDiff: '每月差值',
+      goalTitle: '长期目标',
+      goalAddBtn: '＋ 新增目标',
+      poolLabel: '每月可存款总额',
+      poolUnit: '元 / 月',
+      shareBtn: '📸 生成分享图',
+      footerNote: '月光减速器 Moonbrake · MVP 原型 · 数据仅存本地,不上传服务器',
+      shareLoading: '正在生成分享图...',
+      downloadImgBtn: '⬇ 下载图片',
+      closeBtn: '关闭',
+      cancelBtn: '取消',
+      okBtn: '好',
+      confirmBtn: '确定',
+      unit_次: '次', unit_顿: '顿', unit_杯: '杯', unit_份: '份', unit_件: '件',
+      unit_场: '场', unit_人次: '人次', unit_月: '月', unit_年: '年', unit_other: '其他…'
+    },
+    en: {
+      brandKicker: '🌙 Moonbrake',
+      brandTitleHtml: 'What can this much money <em>get</em> you this month?',
+      brandSub: 'Enter your income & expenses to see how good this month can feel',
+      heroLabelDefault: 'Vibe Index',
+      brokeBannerDefault: 'No budget yet',
+      emptyDailyLine: "Haven't entered any numbers yet — fill in income & expenses above to see the analysis",
+      dailyLineUnder1: 'Daily baseline under $1 / day',
+      emptyBrokeBanner: "No budget yet — fill in your income & expenses to see this month's lifestyle analysis",
+      brokeBannerMsg: "Your fixed costs already exceed your income — you're eating dirt this month. Maybe revisit that rent number.",
+      eatingDirtMode: 'Eating Dirt Mode',
+      analysisTitle: "This Month's Analysis",
+      analysisHint: 'Auto-generated, screenshot-friendly',
+      inputsTitle: 'Income & Expenses',
+      inputsHint: 'Drag the slider or type an amount',
+      labelIncome: 'Monthly Income / Allowance',
+      labelRent: 'Rent (incl. property fee)',
+      labelUtil: 'Utilities',
+      labelCommute: 'Commute',
+      labelPhone: 'Phone Plan',
+      labelOther: 'Other Fixed Costs (gym/subscriptions)',
+      unitYuan: 'USD',
+      overflowHint: 'Exceeds slider range — using the typed number',
+      resetBtn: '↺ Reset Budget',
+      resetNote: 'Only resets these 6 numbers above — goals / comparisons / custom cards stay untouched',
+      indexTitle: 'Lifestyle Conversion',
+      disposableLabel: 'Disposable',
+      editBtn: 'Edit',
+      deleteBtn: 'Delete',
+      editorNote: 'Pick up to 4 — check to activate; you can also add a custom item below',
+      cfNamePh: "Item name, e.g. 'Gym visit'",
+      cfPricePh: 'Price',
+      cfUnitCustomPh: 'Custom unit',
+      addBtn: '+ Add',
+      saveEditBtn: 'Save Changes',
+      applyBtn: 'Done',
+      whatifTitle: '🔮 What If',
+      whatifHint: 'Updates live with the sliders above',
+      compareTitle: 'Rent Comparison',
+      toggleOff: 'Off',
+      toggleOn: 'On',
+      historyPlaceholder: '-- Saved comparisons --',
+      saveCurrentBtn: '💾 Save Current',
+      crHeadlineDefault: 'Extra rent = fewer BBQ nights',
+      crIndexDefault: 'Vibe Index gap: --',
+      crPerMonthDiff: 'monthly diff',
+      goalTitle: 'Long-term Goals',
+      goalAddBtn: '＋ Add Goal',
+      poolLabel: 'Total monthly savings',
+      poolUnit: 'USD / mo',
+      shareBtn: '📸 Generate Share Image',
+      footerNote: 'Moonbrake · MVP prototype · data stays on your device',
+      shareLoading: 'Generating share image...',
+      downloadImgBtn: '⬇ Download Image',
+      closeBtn: 'Close',
+      cancelBtn: 'Cancel',
+      okBtn: 'OK',
+      confirmBtn: 'Confirm',
+      unit_次: 'x', unit_顿: 'meal', unit_杯: 'cup', unit_份: 'order', unit_件: 'item',
+      unit_场: 'show', unit_人次: 'visit', unit_月: 'mo', unit_年: 'yr', unit_other: 'Other…'
+    }
+  };
+  function t(key){
+    return (DICT[currentLang] && DICT[currentLang][key] !== undefined) ? DICT[currentLang][key] : (DICT.zh[key] || key);
+  }
+  function applyStaticI18n(){
+    document.documentElement.lang = isEn() ? 'en' : 'zh-CN';
+    document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t(el.dataset.i18n); });
+    document.querySelectorAll('[data-i18n-html]').forEach(el => { el.innerHTML = t(el.dataset.i18nHtml); });
+    document.querySelectorAll('[data-i18n-ph]').forEach(el => { el.placeholder = t(el.dataset.i18nPh); });
+    const zhSpan = $('langZh'), enSpan = $('langEn');
+    if(zhSpan && enSpan){
+      zhSpan.classList.toggle('active', !isEn());
+      enSpan.classList.toggle('active', isEn());
+    }
+  }
+  async function setLang(lang){
+    if(lang === currentLang) return;
+    currentLang = lang;
+    try{ localStorage.setItem(LANG_KEY, lang); }catch(e){}
+
+    applyLangLimits(); // 先把各处滑块/数字框的上限换成新币种对应的合理范围
+
+    const doReset = await appConfirm(isEn()
+      ? 'Switch the numbers to typical US pricing too? (income, rent, item prices, goal budgets — your current numbers will be replaced)'
+      : '要不要把参考数值也换成对应币种的典型行情?(收入、房租、消费单价、目标预算都会被替换成新默认值)');
+    if(doReset) applyLangDefaults();
+
+    applyStaticI18n();
+    renderEditorList();
+    if(typeof applyCompareToggleUI === 'function') applyCompareToggleUI();
+    if(typeof renderCompareHistorySelect === 'function') renderCompareHistorySelect($('compareHistorySelect') ? $('compareHistorySelect').value : undefined);
+    render();
+    saveInputs();
+  }
+
+  /* 切换语言时，把各处滑块/数字框的上限换成新币种对应的合理范围（不改变当前已填的数值） */
+  function applyLangLimits(){
+    RANGE_IDS.forEach(id => {
+      if(rangeEls[id]) rangeEls[id].max = getSliderMax()[id];
+      if(numEls[id])   numEls[id].max   = getNumMax()[id];
+    });
+    if($('poolSaveRange')) $('poolSaveRange').max = poolSaveSliderMax();
+    if($('cfPrice'))       $('cfPrice').max       = itemPriceMax();
+  }
+
+  /* 用户确认后，把预算/单价/目标预算都换成新币种的典型默认值 */
+  function applyLangDefaults(){
+    const d = getDefaults();
+    RANGE_IDS.forEach(id => {
+      rangeEls[id].value = d[id];
+      numEls[id].value   = d[id];
+    });
+
+    // 消费卡：清掉"卡片上直接改过的单价"覆盖，让它们回到新币种的默认单价
+    // （完整编辑过名称/图标/单位的默认卡片保留，不强制清空——那是用户主动做的改动）
+    setPriceOverrides({});
+
+    // 对比方案：还没被存过历史方案时，直接换成新币种的默认三档房租
+    if(typeof initCompareCols === 'function'){
+      pendingPlans = PLAN_DEFAULTS.map(p => ({label: planLabel(p), rent: planRentDefault(p)}));
+      initCompareCols();
+    }
+
+    // 长期目标：只重置"来自预设"的目标预算(自定义目标的预算是用户自己填的，不动)
+    if(typeof goals !== 'undefined'){
+      goals.forEach(g => {
+        if(g.presetId && g.presetId !== 'custom'){
+          const preset = GOAL_PRESETS.find(p => p.id === g.presetId);
+          if(preset && pCost(preset) != null) g.cost = pCost(preset);
+        }
+      });
+      if(typeof setGoals === 'function') setGoals(goals); // 持久化，避免刷新后又变回旧币种数值
+    }
+
+    // 月存款池：给个粗略默认值(约新默认收入的15%)
+    if($('poolSave')){
+      const poolDefault = Math.round(d.income * 0.15 / 50) * 50;
+      $('poolSave').value = poolDefault;
+      if($('poolSaveRange')) $('poolSaveRange').value = Math.min(poolDefault, +$('poolSaveRange').max);
+    }
+  }
 
   /* ============================================================
      自定义弹窗(替代原生 alert/confirm/prompt)
@@ -920,7 +1149,7 @@
       $('amMsg').textContent = msg;
       $('amInput').style.display = 'none';
       $('amCancelBtn').style.display = 'none';
-      $('amOkBtn').textContent = '好';
+      $('amOkBtn').textContent = t('okBtn');
       $('appModalMask').classList.add('show');
       const cleanup = () => { $('appModalMask').classList.remove('show'); $('amOkBtn').onclick = null; };
       $('amOkBtn').onclick = () => { cleanup(); resolve(true); };
@@ -931,7 +1160,7 @@
       $('amMsg').textContent = msg;
       $('amInput').style.display = 'none';
       $('amCancelBtn').style.display = 'inline-block';
-      $('amOkBtn').textContent = '确定';
+      $('amOkBtn').textContent = t('confirmBtn');
       $('appModalMask').classList.add('show');
       const cleanup = () => {
         $('appModalMask').classList.remove('show');
@@ -947,7 +1176,7 @@
       $('amInput').style.display = 'block';
       $('amInput').value = (defVal === undefined || defVal === null) ? '' : defVal;
       $('amCancelBtn').style.display = 'inline-block';
-      $('amOkBtn').textContent = '确定';
+      $('amOkBtn').textContent = t('confirmBtn');
       $('appModalMask').classList.add('show');
       setTimeout(() => { $('amInput').focus(); $('amInput').select(); }, 30);
       const cleanup = () => {
@@ -969,39 +1198,60 @@
   const COMPARE_HISTORY_KEY = 'b2b_compare_history_v1';
   const GOALS_KEY        = 'b2b_goals_v1';  // 多目标存储
 
-  const DEFAULTS = { income:5000, rent:1500, util:150, commute:100, phone:99, other:50 };
+  /* 货币符号：英文=美元(面向国外用户), 中文=人民币 */
+  function cur(){ return isEn() ? '$' : '¥'; }
+
+  const DEFAULTS_ZH = { income:5000, rent:1500, util:150, commute:100, phone:99, other:50 };
+  const DEFAULTS_EN = { income:1200, rent:700,  util:60,  commute:50,  phone:40, other:50 };
+  function getDefaults(){ return isEn() ? DEFAULTS_EN : DEFAULTS_ZH; }
+
   const PLAN_DEFAULTS = [
-    {label:'方案A(精装)', rent:2500},
-    {label:'方案B(合租)', rent:1800},
-    {label:'方案C(远一点)', rent:1200}
+    {label:'方案A(精装)', labelEn:'Plan A (furnished)', rent:2500, rentEn:1200},
+    {label:'方案B(合租)', labelEn:'Plan B (shared)', rent:1800, rentEn:750},
+    {label:'方案C(远一点)', labelEn:'Plan C (farther out)', rent:1200, rentEn:550}
   ];
 
   const PRESET_POOL = [
-    {id:'bbq',     icon:'🍢', name:'烧烤',           price:100, unit:'顿'},
-    {id:'party',   icon:'🍖', name:'朋友聚餐(3-4人)', price:300, unit:'次'},
-    {id:'tea',     icon:'🧋', name:'奶茶/咖啡',       price:25,  unit:'杯'},
-    {id:'movie',   icon:'🎬', name:'电影',            price:45,  unit:'场'},
-    {id:'takeout', icon:'🍱', name:'外卖',            price:20,  unit:'份'},
-    {id:'hotpot',  icon:'🍜', name:'火锅',            price:80,  unit:'人次'},
-    {id:'game',    icon:'🎮', name:'游戏充值',         price:50,  unit:'次'},
-    {id:'gym',     icon:'🏀', name:'健身单次',         price:40,  unit:'次'},
-    {id:'haircut', icon:'💇', name:'剪头发',           price:60,  unit:'次'},
-    {id:'clothes', icon:'👕', name:'买件衣服',         price:150, unit:'件'},
-    {id:'train',   icon:'🚄', name:'高铁往返',         price:300, unit:'次'},
-    {id:'course',  icon:'📚', name:'网课/会员',        price:30,  unit:'月'}
+    {id:'bbq',     icon:'🍢', name:'烧烤',           nameEn:'BBQ',                    price:100, priceEn:25, unit:'顿', unitEn:'meal'},
+    {id:'party',   icon:'🍖', name:'朋友聚餐(3-4人)', nameEn:'Dinner w/ friends (3-4p)', price:300, priceEn:60, unit:'次', unitEn:'x'},
+    {id:'tea',     icon:'🧋', name:'奶茶/咖啡',       nameEn:'Bubble tea / coffee',    price:25,  priceEn:6,  unit:'杯', unitEn:'cup'},
+    {id:'movie',   icon:'🎬', name:'电影',            nameEn:'Movie',                  price:45,  priceEn:16, unit:'场', unitEn:'show'},
+    {id:'takeout', icon:'🍱', name:'外卖',            nameEn:'Takeout',                price:20,  priceEn:15, unit:'份', unitEn:'order'},
+    {id:'hotpot',  icon:'🍜', name:'火锅',            nameEn:'Hot pot',                price:80,  priceEn:30, unit:'人次', unitEn:'visit'},
+    {id:'game',    icon:'🎮', name:'游戏充值',         nameEn:'Game top-up',            price:50,  priceEn:20, unit:'次', unitEn:'x'},
+    {id:'gym',     icon:'🏀', name:'健身单次',         nameEn:'Gym visit',              price:40,  priceEn:15, unit:'次', unitEn:'x'},
+    {id:'haircut', icon:'💇', name:'剪头发',           nameEn:'Haircut',                price:60,  priceEn:25, unit:'次', unitEn:'x'},
+    {id:'clothes', icon:'👕', name:'买件衣服',         nameEn:'New clothes',            price:150, priceEn:40, unit:'件', unitEn:'item'},
+    {id:'train',   icon:'🚄', name:'高铁往返',         nameEn:'Train round-trip',       price:300, priceEn:70, unit:'次', unitEn:'x'},
+    {id:'course',  icon:'📚', name:'网课/会员',        nameEn:'Online course / membership', price:30, priceEn:15, unit:'月', unitEn:'mo'}
   ];
   const DEFAULT_ACTIVE = ['bbq','party','tea','movie'];
 
   const GOAL_PRESETS = [
-    {id:'japan',     icon:'✈️',  name:'去日本旅行一次',  cost:8000},
-    {id:'domestic',  icon:'🗺️', name:'国内旅行一次',    cost:3000},
-    {id:'phone',     icon:'📱',  name:'换新手机',        cost:5000},
-    {id:'console',   icon:'🎮',  name:'买个Switch/主机', cost:2000},
-    {id:'camera',    icon:'📷',  name:'买台相机',        cost:6000},
-    {id:'cert',      icon:'📚',  name:'考证/雅思培训',   cost:4000},
-    {id:'emergency', icon:'🛡️', name:'应急储蓄金',      cost:10000},
-    {id:'custom',    icon:'✏️',  name:'自定义',          cost:null}
+    {id:'japan',     icon:'✈️',  name:'去日本旅行一次',  nameEn:'Trip to Japan',        cost:8000,  costEn:2500},
+    {id:'domestic',  icon:'🗺️', name:'国内旅行一次',    nameEn:'Domestic trip',        cost:3000,  costEn:600},
+    {id:'phone',     icon:'📱',  name:'换新手机',        nameEn:'New phone',            cost:5000,  costEn:800},
+    {id:'console',   icon:'🎮',  name:'买个Switch/主机', nameEn:'Switch / console',     cost:2000,  costEn:350},
+    {id:'camera',    icon:'📷',  name:'买台相机',        nameEn:'Camera',               cost:6000,  costEn:900},
+    {id:'cert',      icon:'📚',  name:'考证/雅思培训',   nameEn:'Certification / exam prep', cost:4000, costEn:500},
+    {id:'emergency', icon:'🛡️', name:'应急储蓄金',      nameEn:'Emergency fund',       cost:10000, costEn:1500},
+    {id:'custom',    icon:'✏️',  name:'自定义',          nameEn:'Custom',               cost:null,  costEn:null}
   ];
+
+  /* 双语取名/取单位/取价格的小工具：自定义(用户自己打的)内容原样保留，不做机翻/不做换算 */
+  function pName(p){ return (isEn() && p.nameEn) ? p.nameEn : p.name; }
+  function pUnit(p){
+    if(isEn()){
+      if(p.unitEn) return p.unitEn;
+      const key = 'unit_' + p.unit;
+      if(DICT.en[key] !== undefined) return DICT.en[key];
+    }
+    return p.unit;
+  }
+  function planLabel(p){ return (isEn() && p.labelEn) ? p.labelEn : p.label; }
+  function planRentDefault(p){ return (isEn() && p.rentEn !== undefined) ? p.rentEn : p.rent; }
+  function pCost(p){ return (isEn() && p.costEn !== undefined && p.costEn !== null) ? p.costEn : p.cost; }
+  function pPrice(p){ return (isEn() && p.priceEn !== undefined && p.priceEn !== null) ? p.priceEn : p.price; }
 
   /* ============================================================
      收支录入 — 滑块与数字框双向同步
@@ -1009,7 +1259,22 @@
   const RANGE_IDS = ['income','rent','util','commute','phone','other'];
   const rangeEls = {}, numEls = {};
 
-  const NUM_MAX = { income:50000, rent:20000, util:5000, commute:5000, phone:5000, other:5000 };
+  const NUM_MAX_ZH = { income:50000, rent:20000, util:5000, commute:5000, phone:5000, other:5000 };
+  const NUM_MAX_EN = { income:10000, rent:4000,  util:800,  commute:800,  phone:500,  other:800  };
+  function getNumMax(){ return isEn() ? NUM_MAX_EN : NUM_MAX_ZH; }
+
+  const SLIDER_MAX_ZH = { income:20000, rent:8000, util:800, commute:1000, phone:300, other:1000 };
+  const SLIDER_MAX_EN = { income:3000,  rent:1800, util:200, commute:200,  phone:150, other:200  };
+  function getSliderMax(){ return isEn() ? SLIDER_MAX_EN : SLIDER_MAX_ZH; }
+
+  /* 其余各处金额上限：目标预算 / 目标预算滑块 / 对比房租 / 对比房租滑块 / 月存款池 / 月存款池滑块 / 消费单价 */
+  function goalCostMax(){ return isEn() ? 100000 : 500000; }
+  function goalCostSliderMax(){ return isEn() ? 5000 : 20000; }
+  function compareRentMax(){ return isEn() ? 4000 : 20000; }
+  function compareRentSliderMax(){ return isEn() ? 1800 : 8000; }
+  function poolSaveMax(){ return isEn() ? 10000 : 50000; }
+  function poolSaveSliderMax(){ return isEn() ? 2000 : 10000; }
+  function itemPriceMax(){ return isEn() ? 20000 : 100000; }
 
   RANGE_IDS.forEach(id => {
     rangeEls[id] = $(id);
@@ -1024,12 +1289,12 @@
 
     // 数字框 → 滑块（统一走 sanitizeNumberEl：禁止负数/科学计数法/超大值，粘贴内容也会被清洗）
     numEls[id].addEventListener('input', () => {
-      const v = sanitizeNumberEl(numEls[id], 0, NUM_MAX[id]);
+      const v = sanitizeNumberEl(numEls[id], 0, getNumMax()[id]);
       rangeEls[id].value = Math.min(v, +rangeEls[id].max);
       updateRangeOverflow(rangeEls[id], v, $(id + 'Hint'));
       render(); saveInputs();
     });
-    bindPasteSanitize(numEls[id], 0, NUM_MAX[id]);
+    bindPasteSanitize(numEls[id], 0, () => getNumMax()[id]);
   });
 
   function getVal(id){ return +numEls[id].value || 0; }
@@ -1067,10 +1332,15 @@
     el.value = v;
     return v;
   }
-  /* 粘贴事件：paste 触发时值还没落地,下一帧再清洗一遍，兜住"粘贴进异常内容"这种情况 */
+  /* 粘贴事件：paste 触发时值还没落地,下一帧再清洗一遍，兜住"粘贴进异常内容"这种情况
+     max 可以传数字，也可以传一个返回数字的函数（用于随语言/币种动态变化的上限） */
   function bindPasteSanitize(el, min, max, allowDecimal){
     el.addEventListener('paste', () => {
-      setTimeout(() => { sanitizeNumberEl(el, min, max, allowDecimal); el.dispatchEvent(new Event('input')); }, 0);
+      setTimeout(() => {
+        const resolvedMax = (typeof max === 'function') ? max() : max;
+        sanitizeNumberEl(el, min, resolvedMax, allowDecimal);
+        el.dispatchEvent(new Event('input'));
+      }, 0);
     });
   }
 
@@ -1145,14 +1415,17 @@
     const deletedIds = getDeletedDefaultPresetIds();
     return PRESET_POOL
       .filter(p => !deletedIds.includes(p.id))
-      .map(p => overrides[p.id] ? {...p, ...overrides[p.id], id:p.id} : p);
+      .map(p => overrides[p.id]
+        // 一旦被用户编辑过，就不再区分中英文版本了——完全按用户改的这份走，两种语言都一样
+        ? {id:p.id, icon:overrides[p.id].icon, name:overrides[p.id].name, price:overrides[p.id].price, unit:overrides[p.id].unit}
+        : p);
   }
   function isDefaultPresetId(id){ return PRESET_POOL.some(p => p.id === id); }
   function allPresets(){ return defaultPresets().concat(getCustomPresets()); }
   function presetById(id){ return allPresets().find(p => p.id === id); }
   function effectivePrice(preset){
     const overrides = getPriceOverrides();
-    return overrides.hasOwnProperty(preset.id) ? +overrides[preset.id] : preset.price;
+    return overrides.hasOwnProperty(preset.id) ? +overrides[preset.id] : pPrice(preset);
   }
 
   /* ============================================================
@@ -1197,9 +1470,9 @@
     return {
       uid: 'g_' + (_goalUidCounter++),
       presetId: preset.id,
-      name: preset.name,
+      name: pName(preset),
       icon: preset.icon,
-      cost: preset.cost || 5000,
+      cost: pCost(preset) || (isEn() ? 1000 : 5000),
       priority: 2,
       ledger: {}
     };
@@ -1215,6 +1488,14 @@
      这里实现"优先级加权比例"：优先级1权重=4，2=3，3=2，4=1
   ============================================================ */
   const PRIORITY_WEIGHT = {1:4, 2:3, 3:2, 4:1};
+  function priorityOptLabel(v){
+    if(isEn()) return v===1?'🔴 Highest':v===2?'🟠 High':v===3?'🟡 Medium':'🟢 Low';
+    return v===1?'🔴 最高':v===2?'🟠 高':v===3?'🟡 中':'🟢 低';
+  }
+  function priorityShortLabel(v){
+    if(isEn()) return v===1?'Highest':v===2?'High':v===3?'Medium':'Low';
+    return v===1?'最高':v===2?'高':v===3?'中':'低';
+  }
   function computeAllocations(poolSave){
     if(goals.length === 0) return {};
     const totalWeight = goals.reduce((s,g) => s + (PRIORITY_WEIGHT[g.priority] || 1), 0);
@@ -1236,10 +1517,10 @@
     wrap.innerHTML = plans.map((p,i) => `
       <div class="compare-col" id="planCol${i}">
         <span class="compare-col-badge" id="planBadge${i}">🥇 推荐</span>
-        <input class="cc-label" id="planLabel${i}" value="${p.label}">
-        <input type="number" id="planRent${i}" value="${p.rent}" min="0" max="20000">
-        <input type="range" class="${p.rent > 8000 ? 'range-overflow' : ''}" id="planRentRange${i}" min="0" max="8000" step="50" value="${Math.min(p.rent,8000)}" style="margin-top:6px;">
-        <div class="range-overflow-hint ${p.rent > 8000 ? 'show' : ''}" id="planRentHint${i}">已超出滑块范围,以数字为准</div>
+        <input class="cc-label" id="planLabel${i}" value="${planLabel(p)}">
+        <input type="number" id="planRent${i}" value="${p.rent}" min="0" max="${compareRentMax()}">
+        <input type="range" class="${p.rent > compareRentSliderMax() ? 'range-overflow' : ''}" id="planRentRange${i}" min="0" max="${compareRentSliderMax()}" step="50" value="${Math.min(p.rent,compareRentSliderMax())}" style="margin-top:6px;">
+        <div class="range-overflow-hint ${p.rent > compareRentSliderMax() ? 'show' : ''}" id="planRentHint${i}" data-i18n="overflowHint">已超出滑块范围,以数字为准</div>
         <div class="cc-readout" id="planReadout${i}"></div>
       </div>
     `).join('');
@@ -1247,13 +1528,13 @@
       const num = $('planRent'+i), range = $('planRentRange'+i), hint = $('planRentHint'+i);
       $('planLabel'+i).addEventListener('input', () => { renderCompare(); saveInputs(); });
       num.addEventListener('input', () => {
-        const v = sanitizeNumberEl(num, 0, 20000);
+        const v = sanitizeNumberEl(num, 0, compareRentMax());
         range.value = Math.min(v, +range.max);
         updateRangeFill(range); // BUG修复：程序化赋值不触发原生 input 事件,轨道渐变得手动刷新
         updateRangeOverflow(range, v, hint);
         renderCompare(); saveInputs();
       });
-      bindPasteSanitize(num, 0, 20000);
+      bindPasteSanitize(num, 0, compareRentMax);
       range.addEventListener('input', () => {
         num.value = range.value;
         renderCompare(); saveInputs();
@@ -1273,6 +1554,19 @@
     return shadeColor('#C96442', -Math.min(ring,5)*0.14);
   }
   function bandLabel(idx){
+    if(isEn()){
+      if(idx <= 20)  return 'Tight budget · pinching pennies';
+      if(idx <= 40)  return "Getting by · won't starve";
+      if(idx <= 60)  return 'Comfortable · eat what you want';
+      if(idx <= 80)  return 'Living large · buy what you want';
+      if(idx <= 100) return 'Living the dream';
+      if(idx <= 150) return 'Living the dream · leveled up';
+      if(idx <= 200) return 'Almost financially free';
+      if(idx <= 300) return 'Financially free';
+      if(idx <= 500) return 'Winning at life';
+      if(idx <= 1000)return 'Elite wealth';
+      return 'Financial freedom · maxed out (no regrets)';
+    }
     if(idx <= 20)  return '紧巴巴 · 精打细算';
     if(idx <= 40)  return '将就 · 饿不着';
     if(idx <= 60)  return '滋润 · 想吃就吃';
@@ -1286,7 +1580,8 @@
     return '财富自由 · 天花板(此生无憾)';
   }
   function computeIdxForDaily(daily){
-    return daily > 0 ? Math.round(100 * Math.pow(daily/80, 0.6)) : 0;
+    const baseline = isEn() ? 15 : 80; // 达到这个日可支配金额算100分："神仙生活"档
+    return daily > 0 ? Math.round(100 * Math.pow(daily/baseline, 0.6)) : 0;
   }
 
   /* ============================================================
@@ -1307,14 +1602,15 @@
     const isEmpty = (income === 0 && rent === 0 && util === 0 && commute === 0 && phone === 0 && other === 0);
 
     $('disposable').textContent = fmt(disposable);
+    if($('disposableCur')) $('disposableCur').textContent = cur();
     if(isEmpty){
-      $('dailyLine').textContent = '还没填数据,填一下上面的收支就能看到分析啦';
+      $('dailyLine').textContent = t('emptyDailyLine');
     } else if(isBroke){
-      $('dailyLine').textContent = `本月倒欠 ¥${fmt(Math.abs(rawDisposable))}`;
+      $('dailyLine').textContent = isEn() ? `Short ${cur()}${fmt(Math.abs(rawDisposable))} this month` : `本月倒欠 ${cur()}${fmt(Math.abs(rawDisposable))}`;
     } else if(daily < 1){
-      $('dailyLine').textContent = '每日温饱线 不足¥1 / 天';
+      $('dailyLine').textContent = t('dailyLineUnder1');
     } else {
-      $('dailyLine').textContent = `每日温饱线 ¥${fmt(daily)} / 天`;
+      $('dailyLine').textContent = isEn() ? `Daily baseline ${cur()}${fmt(daily)} / day` : `每日温饱线 ${cur()}${fmt(daily)} / 天`;
     }
 
     /* ---- 爽感指数 ---- */
@@ -1330,23 +1626,23 @@
     else if(idxDigits >= 4) $('heroBig').classList.add('xl-num');
     $('heroBig').style.color = isBroke ? '' : ringColor(ring);
     if(isEmpty){
-      $('brokeBanner').textContent = '暂无预算 —— 填一下收支就能看到这个月的生活质量分析';
+      $('brokeBanner').textContent = t('emptyBrokeBanner');
       $('brokeBanner').classList.add('show');
     } else if(isBroke){
-      $('brokeBanner').textContent = '房租水电已经花光收入了 —— 这个月得吃土了,建议重新看看房租那一档';
+      $('brokeBanner').textContent = t('brokeBannerMsg');
       $('brokeBanner').classList.add('show');
     } else {
       $('brokeBanner').classList.remove('show');
     }
 
-    const band = isBroke ? '吃土进行时' : bandLabel(idx);
-    $('heroLabel').textContent = isBroke ? band : `爽感指数 · ${band}`;
+    const band = isBroke ? t('eatingDirtMode') : bandLabel(idx);
+    $('heroLabel').textContent = isBroke ? band : `${t('heroLabelDefault')} · ${band}`;
 
     const badge = $('ringBadge');
     if(!isBroke && ring >= 1){
       badge.style.display = 'inline-block';
       badge.style.background = ringColor(ring);
-      badge.textContent = `🔥 第 ${ring+1} 圈`;
+      badge.textContent = isEn() ? `🔥 Lap ${ring+1}` : `🔥 第 ${ring+1} 圈`;
     } else {
       badge.style.display = 'none';
     }
@@ -1376,14 +1672,14 @@
 
       if(r < ring){
         litCount = TOTAL_DOTS;
-        labelEl.textContent = `第${r+1}圈 · 已满 ✓`;
+        labelEl.textContent = isEn() ? `Lap ${r+1} · Full ✓` : `第${r+1}圈 · 已满 ✓`;
       } else if(r === ring){
         litCount = Math.round(withinRing / 100 * TOTAL_DOTS);
-        labelEl.textContent = `第${r+1}圈 · ${Math.round(withinRing)}%`;
+        labelEl.textContent = isEn() ? `Lap ${r+1} · ${Math.round(withinRing)}%` : `第${r+1}圈 · ${Math.round(withinRing)}%`;
         labelEl.style.color = 'var(--clay)';
       } else {
         litCount = 0;
-        labelEl.textContent = `第${r+1}圈 · 未解锁`;
+        labelEl.textContent = isEn() ? `Lap ${r+1} · Locked` : `第${r+1}圈 · 未解锁`;
       }
 
       for(let i = 0; i < TOTAL_DOTS; i++){
@@ -1399,7 +1695,7 @@
     }
 
     if(ring > MAX_RINGS){
-      $('ringNote').textContent = `+${ring - MAX_RINGS} 圈超纲,已超神`;
+      $('ringNote').textContent = isEn() ? `+${ring - MAX_RINGS} lap(s) off the chart — max level` : `+${ring - MAX_RINGS} 圈超纲,已超神`;
     } else {
       $('ringNote').textContent = '';
     }
@@ -1419,21 +1715,25 @@
   function renderAnalysis(income, rent, disposable, rawDisposable, isBroke){
     const wrap = $('analysisBody');
     const rows = [];
+    const en = isEn();
 
     if(income <= 0){
-      wrap.innerHTML = `<div class="analysis-row"><span class="ic">💡</span><span>先填一下月收入,分析才能算给你看</span></div>`;
+      wrap.innerHTML = en
+        ? `<div class="analysis-row"><span class="ic">💡</span><span>Fill in your monthly income to see the analysis</span></div>`
+        : `<div class="analysis-row"><span class="ic">💡</span><span>先填一下月收入,分析才能算给你看</span></div>`;
       return;
     }
 
     const rentRatio = (rent / income) * 100;
-    let badgeClass = 'good', verdict = '很健康,房租压力很小';
-    if(rentRatio > 50){ badgeClass = 'bad'; verdict = '偏高,房租快把工资吃完了'; }
-    else if(rentRatio > 30){ badgeClass = 'mid'; verdict = '还行,但有点吃紧'; }
+    let badgeClass = 'good';
+    let verdict = en ? 'Very healthy — rent barely dents you' : '很健康,房租压力很小';
+    if(rentRatio > 50){ badgeClass = 'bad'; verdict = en ? 'High — rent is eating your paycheck' : '偏高,房租快把工资吃完了'; }
+    else if(rentRatio > 30){ badgeClass = 'mid'; verdict = en ? "OK, but it's a bit tight" : '还行,但有点吃紧'; }
 
     rows.push(`
       <div class="analysis-row">
         <span class="ic">🏠</span>
-        <span>房租占收入 <b>${rentRatio.toFixed(0)}%</b>
+        <span>${en ? 'Rent is' : '房租占收入'} <b>${rentRatio.toFixed(0)}%</b>${en ? ' of income' : ''}
           <span class="rent-ratio-badge ${badgeClass}">${verdict}</span>
         </span>
       </div>
@@ -1443,14 +1743,18 @@
       rows.push(`
         <div class="analysis-row">
           <span class="ic">⚠️</span>
-          <span>这个月固定支出已经超过收入,倒欠 <b>¥${fmt(Math.abs(rawDisposable))}</b>。先看看房租那一档能不能往下压一压。</span>
+          <span>${en
+            ? `Your fixed costs already exceed income this month, short <b>${cur()}${fmt(Math.abs(rawDisposable))}</b>. Maybe see if rent can come down a bit.`
+            : `这个月固定支出已经超过收入,倒欠 <b>${cur()}${fmt(Math.abs(rawDisposable))}</b>。先看看房租那一档能不能往下压一压。`}</span>
         </div>
       `);
     } else {
       rows.push(`
         <div class="analysis-row">
           <span class="ic">📊</span>
-          <span>刨去所有固定支出,这个月还能自由支配 <b>¥${fmt(disposable)}</b>,平均每天 <b>¥${fmt(disposable/30)}</b>。</span>
+          <span>${en
+            ? `After all fixed costs, you've got <b>${cur()}${fmt(disposable)}</b> free this month — about <b>${cur()}${fmt(disposable/30)}</b> a day.`
+            : `刨去所有固定支出,这个月还能自由支配 <b>${cur()}${fmt(disposable)}</b>,平均每天 <b>${cur()}${fmt(disposable/30)}</b>。`}</span>
         </div>
       `);
     }
@@ -1465,19 +1769,23 @@
       if(firstPreset){
         const price = effectivePrice(firstPreset);
         const count = Math.floor(saveAmount / price);
-        if(count > 0) extra = `,相当于每月多吃 <b>${count}</b> ${firstPreset.unit}${firstPreset.name}`;
+        if(count > 0) extra = en
+          ? `, that's <b>${count}</b> more ${pUnit(firstPreset)} of ${pName(firstPreset)} a month`
+          : `,相当于每月多吃 <b>${count}</b> ${pUnit(firstPreset)}${pName(firstPreset)}`;
       }
       rows.push(`
         <div class="analysis-row">
           <span class="ic">💰</span>
-          <span>如果房租能降到收入的 30%(约 <b>¥${fmt(healthyRent)}</b>),每月能多出 <b>¥${fmt(saveAmount)}</b>${extra}。</span>
+          <span>${en
+            ? `If rent dropped to 30% of income (about <b>${cur()}${fmt(healthyRent)}</b>), you'd free up <b>${cur()}${fmt(saveAmount)}</b> a month${extra}.`
+            : `如果房租能降到收入的 30%(约 <b>${cur()}${fmt(healthyRent)}</b>),每月能多出 <b>${cur()}${fmt(saveAmount)}</b>${extra}。`}</span>
         </div>
       `);
     } else {
       rows.push(`
         <div class="analysis-row">
           <span class="ic">✅</span>
-          <span>房租已经控制在健康区间内,不用太纠结这一项了。</span>
+          <span>${en ? "Your rent is already in a healthy range — no need to stress about it." : '房租已经控制在健康区间内,不用太纠结这一项了。'}</span>
         </div>
       `);
     }
@@ -1490,14 +1798,18 @@
   ============================================================ */
   function renderWhatIf(income, rent, util, commute, phone, other, disposable, isBroke){
     const wrap = $('whatifGrid');
+    const en = isEn();
+    const wiDelta = en ? 100 : 500; // 假设变动的金额：按币种/生活成本比例调整，避免美元档下-$500房租显得离谱
     if(income === 0 && rent === 0 && util === 0 && commute === 0 && phone === 0 && other === 0){
-      wrap.innerHTML = `<div class="whatif-empty">先填一下收支,就能看到"房租降500""收入涨500"能多买多少东西啦</div>`;
+      wrap.innerHTML = en
+        ? `<div class="whatif-empty">Fill in income & expenses to see what "-${cur()}${wiDelta} rent" or "+${cur()}${wiDelta} income" would buy you</div>`
+        : `<div class="whatif-empty">先填一下收支,就能看到"房租降${wiDelta}""收入涨${wiDelta}"能多买多少东西啦</div>`;
       return;
     }
 
     const scenarios = [
-      {icon:'🏠', label:'如果房租降 ¥500', deltaRent:-500, deltaIncome:0},
-      {icon:'💰', label:'如果收入涨 ¥500', deltaRent:0, deltaIncome:500}
+      {icon:'🏠', label: en ? `If rent drops ${cur()}${wiDelta}` : `如果房租降 ${cur()}${wiDelta}`, deltaRent:-wiDelta, deltaIncome:0},
+      {icon:'💰', label: en ? `If income rises ${cur()}${wiDelta}` : `如果收入涨 ${cur()}${wiDelta}`, deltaRent:0, deltaIncome:wiDelta}
     ];
     const baseIdx = isBroke ? 0 : computeIdxForDaily(disposable/30);
     const activeIds = getActiveIds();
@@ -1520,7 +1832,7 @@
         const d = newCount - baseCount;
         if(d === 0) return '';
         const sign = d > 0 ? '+' : '-';
-        return `<span class="whatif-chip ${d<0?'negative':''}">${preset.icon} <b>${sign}${fmtCount(Math.abs(d))}</b> ${preset.unit}${preset.name}</span>`;
+        return `<span class="whatif-chip ${d<0?'negative':''}">${preset.icon} <b>${sign}${fmtCount(Math.abs(d))}</b> ${pUnit(preset)}${pName(preset)}</span>`;
       }).filter(Boolean).join('');
 
       const idxSign = idxDelta >= 0 ? '+' : '';
@@ -1528,8 +1840,8 @@
         <div class="whatif-scenario">
           <div class="whatif-head"><span class="wi-ic">${sc.icon}</span>${sc.label}</div>
           <div class="whatif-items">
-            ${chips || '<span class="whatif-empty">暂时没有明显变化</span>'}
-            <span class="whatif-idx-chip">😁 爽感指数 ${idxSign}${idxDelta}</span>
+            ${chips || `<span class="whatif-empty">${en ? 'No noticeable change' : '暂时没有明显变化'}</span>`}
+            <span class="whatif-idx-chip">😁 ${en ? 'Vibe Index' : '爽感指数'} ${idxSign}${idxDelta}</span>
           </div>
         </div>
       `;
@@ -1552,14 +1864,14 @@
       item.className = 'index-item';
       item.innerHTML = `
         <span class="ic">${preset.icon}</span>
-        <div class="val">${fmtCount(count)}<small>${preset.unit}</small></div>
-        <div class="lbl">${preset.name} · ¥<input class="price-input" type="number" value="${price}" data-id="${preset.id}">/${preset.unit}</div>
+        <div class="val">${fmtCount(count)}<small>${pUnit(preset)}</small></div>
+        <div class="lbl">${pName(preset)} · ${cur()}<input class="price-input" type="number" value="${price}" data-id="${preset.id}">/${pUnit(preset)}</div>
       `;
       grid.appendChild(item);
     });
     grid.querySelectorAll('.price-input').forEach(inp => {
       inp.addEventListener('input', () => {
-        const v = sanitizeNumberEl(inp, 0, 100000, true);
+        const v = sanitizeNumberEl(inp, 0, itemPriceMax(), true);
         if(v <= 0) return; // 忽略非法输入，不写入
         const overrides = getPriceOverrides();
         overrides[inp.dataset.id] = v;
@@ -1567,7 +1879,7 @@
         render();
       });
       inp.addEventListener('click', e => e.stopPropagation());
-      bindPasteSanitize(inp, 0, 100000, true);
+      bindPasteSanitize(inp, 0, itemPriceMax, true);
     });
   }
 
@@ -1579,14 +1891,18 @@
     const activeIds = getActiveIds();
     const customIds = getCustomPresets().map(p => p.id);
     const defaultIds = PRESET_POOL.map(p => p.id);
+    const en = isEn();
 
     if(pendingReplaceId){
       const newPreset = presetById(pendingReplaceId);
       const banner = document.createElement('div');
       banner.className = 'replace-banner';
-      banner.innerHTML = `<span>已经选了4个,点下面要换掉的那张,换成「${newPreset ? newPreset.icon + newPreset.name : ''}」</span>`;
+      const newLabel = newPreset ? newPreset.icon + pName(newPreset) : '';
+      banner.innerHTML = en
+        ? `<span>You already have 4 — tap the one below to swap out for "${newLabel}"</span>`
+        : `<span>已经选了4个,点下面要换掉的那张,换成「${newLabel}」</span>`;
       const cancelBtn = document.createElement('button');
-      cancelBtn.textContent = '取消';
+      cancelBtn.textContent = t('cancelBtn');
       cancelBtn.addEventListener('click', () => { pendingReplaceId = null; renderEditorList(); });
       banner.appendChild(cancelBtn);
       list.appendChild(banner);
@@ -1601,13 +1917,13 @@
       row.innerHTML = `
         <input type="checkbox" data-id="${p.id}" ${checked ? 'checked' : ''} ${pendingReplaceId ? 'style="pointer-events:none;opacity:0.4;"' : ''}>
         <span class="er-icon">${p.icon}</span>
-        <span class="er-name">${p.name}</span>
-        <span class="er-price">¥${effectivePrice(p)}/${p.unit}</span>
-        ${pendingReplaceId && checked ? `<button class="er-replace-btn" data-id="${p.id}">⇄ 换成它</button>` : ''}
+        <span class="er-name">${pName(p)}</span>
+        <span class="er-price">${cur()}${effectivePrice(p)}/${pUnit(p)}</span>
+        ${pendingReplaceId && checked ? `<button class="er-replace-btn" data-id="${p.id}">⇄ ${en ? 'Swap in' : '换成它'}</button>` : ''}
         ${(isCustom || isDefault) && !pendingReplaceId ? `
           <span class="er-actions">
-            <button type="button" class="er-edit-btn" data-id="${p.id}">编辑</button>
-            <button type="button" class="er-del-btn" data-id="${p.id}">删除</button>
+            <button type="button" class="er-edit-btn" data-id="${p.id}">${t('editBtn')}</button>
+            <button type="button" class="er-del-btn" data-id="${p.id}">${t('deleteBtn')}</button>
           </span>` : ''}
       `;
       list.appendChild(row);
@@ -1654,10 +1970,10 @@
         const preset = presetById(btn.dataset.id);
         if(!preset) return;
         $('cfIcon').value = preset.icon;
-        $('cfName').value = preset.name;
+        $('cfName').value = pName(preset);
         $('cfPrice').value = effectivePrice(preset);
-        setCfUnitValue(preset.unit);
-        $('addCustomBtn').textContent = '保存修改';
+        setCfUnitValue(preset.unit); // 注意：这里必须用规范值(preset.unit)匹配下拉选项,不能用 pUnit()(会因为语言不同匹配不上)
+        $('addCustomBtn').textContent = t('saveEditBtn');
         $('addCustomBtn').dataset.editing = preset.id;
         $('cfFormError').classList.remove('show');
       });
@@ -1668,7 +1984,7 @@
         e.stopPropagation();
         const id = btn.dataset.id;
         const isDefault = isDefaultPresetId(id);
-        if(!(await appConfirm(isDefault ? '删除这个默认场景? 删除后会从列表中隐藏。' : '删除这个自定义场景?'))) return;
+        if(!(await appConfirm(isEn() ? (isDefault ? 'Delete this default item? It will be hidden from the list.' : 'Delete this custom item?') : (isDefault ? '删除这个默认场景? 删除后会从列表中隐藏。' : '删除这个自定义场景?')))) return;
         if(isDefault){
           const deleted = getDeletedDefaultPresetIds();
           if(!deleted.includes(id)) setDeletedDefaultPresetIds(deleted.concat(id));
@@ -1721,6 +2037,14 @@
 
   /* P1 校验：禁止负数/0价格/空名称，名称限20字符(兼容Emoji)，支持编辑/删除 */
   function validateCustomForm(name, price, unit){
+    if(isEn()){
+      if(!name) return 'Item name cannot be empty';
+      if(Array.from(name).length > 20) return 'Name can be at most 20 characters';
+      if(isNaN(price) || price <= 0) return 'Price must be greater than 0';
+      if(!unit) return 'Unit cannot be empty';
+      if(Array.from(unit).length > 6) return 'Unit can be at most 6 characters';
+      return '';
+    }
     if(!name) return '场景名称不能为空';
     if(Array.from(name).length > 20) return '名称最多20个字符';
     if(isNaN(price) || price <= 0) return '价格必须大于0';
@@ -1729,8 +2053,8 @@
     return '';
   }
 
-  $('cfPrice').addEventListener('input', () => { sanitizeNumberEl($('cfPrice'), 0, 100000, true); });
-  bindPasteSanitize($('cfPrice'), 0, 100000, true);
+  $('cfPrice').addEventListener('input', () => { sanitizeNumberEl($('cfPrice'), 0, itemPriceMax(), true); });
+  bindPasteSanitize($('cfPrice'), 0, itemPriceMax, true);
 
   $('addCustomBtn').addEventListener('click', () => {
     const icon  = $('cfIcon').value.trim() || '⭐';
@@ -1767,7 +2091,7 @@
         }
       }
       delete $('addCustomBtn').dataset.editing;
-      $('addCustomBtn').textContent = '+ 添加';
+      $('addCustomBtn').textContent = t('addBtn');
     } else {
       const id = 'custom_' + Date.now();
       const customs = getCustomPresets();
@@ -1786,11 +2110,12 @@
   function renderCompare(){
     const income     = getVal('income');
     const otherFixed = getVal('util') + getVal('commute') + getVal('phone') + getVal('other');
+    const en = isEn();
 
     const plans = [0,1,2].map(i => {
       const labelEl = $('planLabel'+i), rentEl = $('planRent'+i);
       if(!labelEl || !rentEl) return null;
-      const label      = labelEl.value.trim() || ('方案' + String.fromCharCode(65+i));
+      const label      = labelEl.value.trim() || ((en?'Plan ':'方案') + String.fromCharCode(65+i));
       const rent       = +rentEl.value || 0;
       const rawDisp    = income - rent - otherFixed;
       const disposable = Math.max(0, rawDisp);
@@ -1802,8 +2127,8 @@
     plans.forEach((p,i) => {
       const el = $('planReadout'+i);
       if(el) el.textContent = p.broke
-        ? '倒欠钱,吃土'
-        : `可支配 ¥${fmt(p.disposable)} · 爽感 ${p.idx}`;
+        ? (en ? 'In the red, eating dirt' : '倒欠钱,吃土')
+        : (en ? `Disposable ${cur()}${fmt(p.disposable)} · Vibe ${p.idx}` : `可支配 ${cur()}${fmt(p.disposable)} · 爽感 ${p.idx}`);
     });
 
     let best = plans[0], worst = plans[0];
@@ -1815,9 +2140,11 @@
     // P1: 自动推荐最佳方案(可支配最多的那一档),打上徽章+高亮边框
     [0,1,2].forEach(i => {
       const col = $('planCol'+i);
+      const badge = $('planBadge'+i);
       if(!col) return;
       const isBest = best.i === i && !best.broke && plans.length > 1 && best.disposable > worst.disposable;
       col.classList.toggle('recommended', isBest);
+      if(badge) badge.textContent = en ? '🥇 Best' : '🥇 推荐';
     });
 
     const diffRent       = Math.abs(best.rent - worst.rent);
@@ -1825,9 +2152,11 @@
     const diffIdx        = best.idx - worst.idx;
 
     $('crHeadline').textContent = diffRent > 0
-      ? `${worst.label} 比 ${best.label} 多花 ¥${fmt(diffRent)} 房租`
-      : '当前几套方案房租一样,先改改数字看看差别';
-    $('crIndex').textContent = `爽感指数差 ${diffIdx} 点(${best.label} ${best.idx} vs ${worst.label} ${worst.idx})`;
+      ? (en ? `${worst.label} costs ${cur()}${fmt(diffRent)} more rent than ${best.label}` : `${worst.label} 比 ${best.label} 多花 ${cur()}${fmt(diffRent)} 房租`)
+      : (en ? 'These plans have the same rent — tweak a number to see a difference' : '当前几套方案房租一样,先改改数字看看差别');
+    $('crIndex').textContent = en
+      ? `Vibe Index gap ${diffIdx} (${best.label} ${best.idx} vs ${worst.label} ${worst.idx})`
+      : `爽感指数差 ${diffIdx} 点(${best.label} ${best.idx} vs ${worst.label} ${worst.idx})`;
 
     const itemsWrap = $('crItems');
     itemsWrap.innerHTML = '';
@@ -1842,8 +2171,8 @@
       item.className = 'cr-item';
       item.innerHTML = `
         <span class="ic">${preset.icon}</span>
-        <div class="val">${fmtCount(diffCount)}<small>${preset.unit}</small></div>
-        <div class="lbl">${preset.name} · 每月差值</div>
+        <div class="val">${fmtCount(diffCount)}<small>${pUnit(preset)}</small></div>
+        <div class="lbl">${pName(preset)} · ${t('crPerMonthDiff')}</div>
       `;
       itemsWrap.appendChild(item);
     });
@@ -1857,12 +2186,12 @@
   function renderCompareHistorySelect(selectedId){
     const sel = $('compareHistorySelect');
     const list = getCompareHistory();
-    sel.innerHTML = '<option value="">-- 历史方案组 --</option>' +
+    sel.innerHTML = `<option value="">${t('historyPlaceholder')}</option>` +
       list.map(h => `<option value="${h.id}"${h.id===selectedId?' selected':''}>${h.name}</option>`).join('');
   }
   $('compareSaveBtn').addEventListener('click', async () => {
     const list = getCompareHistory();
-    const name = await appPrompt('给这组对比方案起个名字:', '我的方案组' + (list.length + 1));
+    const name = await appPrompt(isEn() ? 'Name this comparison set:' : '给这组对比方案起个名字:', (isEn() ? 'My Set ' : '我的方案组') + (list.length + 1));
     if(!name) return;
     const plans = [0,1,2].map(i => ({
       label: $('planLabel'+i).value, rent: $('planRent'+i).value
@@ -1892,7 +2221,7 @@
   $('compareDeleteBtn').addEventListener('click', async () => {
     const id = $('compareHistorySelect').value;
     if(!id) return;
-    if(!(await appConfirm('删除这组历史方案?'))) return;
+    if(!(await appConfirm(isEn() ? 'Delete this saved comparison?' : '删除这组历史方案?'))) return;
     setCompareHistory(getCompareHistory().filter(h => h.id !== id));
     renderCompareHistorySelect();
   });
@@ -1904,7 +2233,7 @@
   let compareOn = getCompareOn();
   function applyCompareToggleUI(){
     $('compareToggle').classList.toggle('on', compareOn);
-    $('compareHint').textContent = compareOn ? '开启' : '关闭';
+    $('compareHint').textContent = compareOn ? t('toggleOn') : t('toggleOff');
     $('compareBody').classList.toggle('show', compareOn);
   }
   $('compareToggleRow').addEventListener('click', () => {
@@ -1920,6 +2249,7 @@
     const poolSaveInput = +$('poolSave').value || 0;
     const disposable = +($('disposable').textContent.replace(/,/g,'')) || 0;
     const isBroke = $('heroBig').classList.contains('broke');
+    const en = isEn();
     updateRangeOverflow($('poolSaveRange'), poolSaveInput, $('poolSaveHint'));
     // P1: 实际能存的钱不能超过本月可支配金额，避免"显示"和"计算"对不上
     const actualPool = isBroke ? 0 : Math.min(poolSaveInput, disposable);
@@ -1929,11 +2259,15 @@
 
     if(poolSaveInput > disposable){
       $('poolHint').innerHTML = isBroke
-        ? `⚠️ 这个月已经倒欠钱了,实际能存 <b>¥0</b>,下面的分配是按 ¥0 算的`
-        : `⚠️ 你填的 ¥${fmt(poolSaveInput)} 超过本月可支配 ¥${fmt(disposable)},实际按 <b>¥${fmt(actualPool)}</b> 分配`;
+        ? (en ? `⚠️ You're already short this month — actual savings <b>${cur()}0</b>, allocations below are based on ${cur()}0`
+              : `⚠️ 这个月已经倒欠钱了,实际能存 <b>${cur()}0</b>,下面的分配是按 ${cur()}0 算的`)
+        : (en ? `⚠️ You entered ${cur()}${fmt(poolSaveInput)}, over this month's disposable ${cur()}${fmt(disposable)} — actually allocating <b>${cur()}${fmt(actualPool)}</b>`
+              : `⚠️ 你填的 ${cur()}${fmt(poolSaveInput)} 超过本月可支配 ${cur()}${fmt(disposable)},实际按 <b>${cur()}${fmt(actualPool)}</b> 分配`);
       $('poolHint').style.color = 'var(--clay)';
     } else {
-      $('poolHint').innerHTML = `本月可支配 ¥${fmt(disposable)},这笔 ¥${fmt(actualPool)} 将按各目标优先级权重自动分配`;
+      $('poolHint').innerHTML = en
+        ? `This month's disposable is ${cur()}${fmt(disposable)} — ${cur()}${fmt(actualPool)} of it will be auto-allocated by goal priority`
+        : `本月可支配 ${cur()}${fmt(disposable)},这笔 ${cur()}${fmt(actualPool)} 将按各目标优先级权重自动分配`;
       $('poolHint').style.color = '';
     }
 
@@ -1953,14 +2287,14 @@
 
       // 优先级选项
       const priorityOpts = [1,2,3,4].map(v =>
-        `<option value="${v}" ${g.priority===v?'selected':''}>${v===1?'🔴 最高':v===2?'🟠 高':v===3?'🟡 中':'🟢 低'}</option>`
+        `<option value="${v}" ${g.priority===v?'selected':''}>${priorityOptLabel(v)}</option>`
       ).join('');
 
       card.innerHTML = `
-        <button class="ticket-remove-btn" data-uid="${g.uid}" title="删除此目标">✕</button>
+        <button class="ticket-remove-btn" data-uid="${g.uid}" title="${en?'Delete this goal':'删除此目标'}">✕</button>
         <div class="ticket-top">
           <div style="flex:1; padding-right:24px;">
-            <div class="ticket-dest">Long-term Goal · 长期目标 #${gIdx+1}</div>
+            <div class="ticket-dest">${en ? `Long-term Goal #${gIdx+1}` : `Long-term Goal · 长期目标 #${gIdx+1}`}</div>
             <input class="ticket-name-input" data-uid="${g.uid}" data-field="name" value="${g.name}" maxlength="20">
           </div>
           <div class="ticket-icon">${g.icon}</div>
@@ -1970,7 +2304,7 @@
         <div class="goal-chips" data-uid="${g.uid}">
           ${GOAL_PRESETS.map(p => `
             <div class="goal-chip ${g.presetId===p.id?'active':''}" data-uid="${g.uid}" data-preset="${p.id}">
-              ${p.icon} ${p.name}
+              ${p.icon} ${pName(p)}
             </div>
           `).join('')}
         </div>
@@ -1980,20 +2314,20 @@
         <!-- 预算 + 优先级 -->
         <div class="ticket-meta">
           <div>
-            <label>目标预算（元）</label>
-            <input type="number" data-uid="${g.uid}" data-field="cost" value="${g.cost || ''}" min="0" max="500000">
-            <input type="range" class="${(g.cost||0) > 20000 ? 'range-overflow' : ''}" data-uid="${g.uid}" data-field="costRange" min="0" max="20000" step="100" value="${Math.min(g.cost||0,20000)}" style="margin-top:6px;">
-            <div class="range-overflow-hint ${(g.cost||0) > 20000 ? 'show' : ''}" data-role="costHint">已超出滑块范围,以数字为准</div>
+            <label>${en ? 'Budget (USD)' : '目标预算（元）'}</label>
+            <input type="number" data-uid="${g.uid}" data-field="cost" value="${g.cost || ''}" min="0" max="${goalCostMax()}">
+            <input type="range" class="${(g.cost||0) > goalCostSliderMax() ? 'range-overflow' : ''}" data-uid="${g.uid}" data-field="costRange" min="0" max="${goalCostSliderMax()}" step="100" value="${Math.min(g.cost||0,goalCostSliderMax())}" style="margin-top:6px;">
+            <div class="range-overflow-hint ${(g.cost||0) > goalCostSliderMax() ? 'show' : ''}" data-role="costHint">${t('overflowHint')}</div>
           </div>
           <div>
-            <label>优先级</label>
+            <label>${en ? 'Priority' : '优先级'}</label>
             <select class="priority-select select-nice" data-uid="${g.uid}">${priorityOpts}</select>
           </div>
           <div>
-            <label>本目标每月分配</label>
+            <label>${en ? 'Monthly allocation' : '本目标每月分配'}</label>
             <div style="padding:8px 9px; font-family:var(--font-num); font-weight:700; font-size:14px; color:var(--mint);">
-              ¥<span data-role="allocAmt">${fmt(alloc)}</span>
-              <div class="alloc-badge" data-role="allocBadge">优先级 ${g.priority===1?'最高':g.priority===2?'高':g.priority===3?'中':'低'}</div>
+              ${cur()}<span data-role="allocAmt">${fmt(alloc)}</span>
+              <div class="alloc-badge" data-role="allocBadge">${en ? 'Priority' : '优先级'} ${priorityShortLabel(g.priority)}</div>
             </div>
           </div>
         </div>
@@ -2001,8 +2335,8 @@
         <!-- 进度条 -->
         <div class="ticket-bar-track"><div class="ticket-bar-fill" data-role="barFill" style="width:${barPct}%"></div></div>
         <div class="ticket-stats">
-          <span>已攒 <b data-role="savedAmt">¥${fmt(saved)}</b> / ¥<span data-role="costEcho">${fmt(cost)}</span></span>
-          <span>按当前速度还需 <b data-role="monthsStat">${remaining <= 0 ? '已达成 🎉' : (isFinite(months) ? months + ' 个月' : '-- 个月')}</b></span>
+          <span>${en ? 'Saved' : '已攒'} <b data-role="savedAmt">${cur()}${fmt(saved)}</b> / ${cur()}<span data-role="costEcho">${fmt(cost)}</span></span>
+          <span>${en ? 'At this rate, needs' : '按当前速度还需'} <b data-role="monthsStat">${remaining <= 0 ? (en?'Done 🎉':'已达成 🎉') : (isFinite(months) ? months + (en?' mo':' 个月') : (en?'-- mo':'-- 个月'))}</b></span>
         </div>
 
         <div class="ticket-divider"></div>
@@ -2011,11 +2345,11 @@
         <div class="ticket-log-row">
           <span class="ticket-note" data-role="logNote">
             ${alreadyLogged
-              ? `本月已记 ¥${fmt(g.ledger[mk])}，下月可再记`
-              : `记录本月实际存款 ¥${fmt(alloc)}（可手动改）`}
+              ? (en ? `Logged ${cur()}${fmt(g.ledger[mk])} this month, log again next month` : `本月已记 ${cur()}${fmt(g.ledger[mk])}，下月可再记`)
+              : (en ? `Log this month's actual savings ${cur()}${fmt(alloc)} (editable)` : `记录本月实际存款 ${cur()}${fmt(alloc)}（可手动改）`)}
           </span>
           <button class="log-btn" data-uid="${g.uid}" ${alreadyLogged?'disabled':''}>
-            ${alreadyLogged ? '本月已记录 ✓' : '+ 记录本月存款'}
+            ${alreadyLogged ? (en?'Logged ✓':'本月已记录 ✓') : (en?'+ Log this month':'+ 记录本月存款')}
           </button>
         </div>
       `;
@@ -2027,6 +2361,7 @@
     function patchGoalCard(g, allocs){
       const card = container.querySelector(`.ticket[data-uid="${g.uid}"]`);
       if(!card) return;
+      const en = isEn();
       const alloc     = (allocs && allocs[g.uid]) || 0;
       const saved     = goalTotalSaved(g);
       const cost      = g.cost || 0;
@@ -2042,23 +2377,23 @@
       const costHintEl  = card.querySelector('[data-role="costHint"]');
       updateRangeOverflow(costRangeEl, cost, costHintEl);
       const savedAmt = card.querySelector('[data-role="savedAmt"]');
-      if(savedAmt) savedAmt.textContent = '¥' + fmt(saved);
+      if(savedAmt) savedAmt.textContent = cur() + fmt(saved);
       const costEcho = card.querySelector('[data-role="costEcho"]');
       if(costEcho) costEcho.textContent = fmt(cost);
       const monthsStat = card.querySelector('[data-role="monthsStat"]');
-      if(monthsStat) monthsStat.textContent = remaining <= 0 ? '已达成 🎉' : (isFinite(months) ? months + ' 个月' : '-- 个月');
+      if(monthsStat) monthsStat.textContent = remaining <= 0 ? (en?'Done 🎉':'已达成 🎉') : (isFinite(months) ? months + (en?' mo':' 个月') : (en?'-- mo':'-- 个月'));
       const allocAmt = card.querySelector('[data-role="allocAmt"]');
       if(allocAmt) allocAmt.textContent = fmt(alloc);
       const allocBadge = card.querySelector('[data-role="allocBadge"]');
-      if(allocBadge) allocBadge.textContent = `优先级 ${g.priority===1?'最高':g.priority===2?'高':g.priority===3?'中':'低'}`;
+      if(allocBadge) allocBadge.textContent = `${en?'Priority':'优先级'} ${priorityShortLabel(g.priority)}`;
       const logNote = card.querySelector('[data-role="logNote"]');
       if(logNote) logNote.textContent = alreadyLogged
-        ? `本月已记 ¥${fmt(g.ledger[mk])}，下月可再记`
-        : `记录本月实际存款 ¥${fmt(alloc)}（可手动改）`;
+        ? (en ? `Logged ${cur()}${fmt(g.ledger[mk])} this month, log again next month` : `本月已记 ${cur()}${fmt(g.ledger[mk])}，下月可再记`)
+        : (en ? `Log this month's actual savings ${cur()}${fmt(alloc)} (editable)` : `记录本月实际存款 ${cur()}${fmt(alloc)}（可手动改）`);
       const logBtn = card.querySelector('.log-btn');
       if(logBtn){
         logBtn.disabled = alreadyLogged;
-        logBtn.textContent = alreadyLogged ? '本月已记录 ✓' : '+ 记录本月存款';
+        logBtn.textContent = alreadyLogged ? (en?'Logged ✓':'本月已记录 ✓') : (en?'+ Log this month':'+ 记录本月存款');
       }
       // 名称手动编辑后 presetId 会变成 custom，同步取消预设 chip 的高亮
       card.querySelectorAll('.goal-chip').forEach(chip => {
@@ -2071,8 +2406,8 @@
     container.querySelectorAll('.ticket-remove-btn').forEach(btn => {
       btn.addEventListener('click', async () => {
         const uid = btn.dataset.uid;
-        if(goals.length <= 1){ await appAlert('至少保留一个目标哦~'); return; }
-        if(!(await appConfirm('确定删除这个目标及其存款记录?'))) return;
+        if(goals.length <= 1){ await appAlert(isEn() ? 'Keep at least one goal~' : '至少保留一个目标哦~'); return; }
+        if(!(await appConfirm(isEn() ? 'Delete this goal and its savings log?' : '确定删除这个目标及其存款记录?'))) return;
         goals = goals.filter(g => g.uid !== uid);
         saveGoalsAndRender();
       });
@@ -2095,7 +2430,7 @@
       inp.addEventListener('input', () => {
         const g = container ? goals.find(x => x.uid === inp.dataset.uid) : null;
         if(g){
-          const v = sanitizeNumberEl(inp, 0, 500000);
+          const v = sanitizeNumberEl(inp, 0, goalCostMax());
           g.cost = v;
           const range = container.querySelector(`input[data-field="costRange"][data-uid="${inp.dataset.uid}"]`);
           if(range){ range.value = Math.min(g.cost, +range.max); updateRangeFill(range); }
@@ -2103,7 +2438,7 @@
           patchGoalCard(g, allocations);
         }
       });
-      bindPasteSanitize(inp, 0, 500000);
+      bindPasteSanitize(inp, 0, goalCostMax);
     });
     container.querySelectorAll('input[data-field="costRange"]').forEach(range => {
       range.addEventListener('input', () => {
@@ -2135,9 +2470,9 @@
         if(!g || !preset) return;
         g.presetId = preset.id;
         if(preset.id !== 'custom'){
-          g.name = preset.name;
+          g.name = pName(preset);
           g.icon = preset.icon;
-          if(preset.cost) g.cost = preset.cost;
+          if(pCost(preset)) g.cost = pCost(preset);
         }
         saveGoalsAndRender();
       });
@@ -2150,10 +2485,10 @@
         const g = goals.find(x => x.uid === btn.dataset.uid);
         if(!g) return;
         const alloc    = allocations[g.uid] || 0;
-        const amtStr   = await appPrompt(`记录 "${g.name}" 本月存款(默认分配 ¥${fmt(alloc)}):`, alloc);
+        const amtStr   = await appPrompt(isEn() ? `Log this month's savings for "${g.name}" (default ${cur()}${fmt(alloc)}):` : `记录 "${g.name}" 本月存款(默认分配 ${cur()}${fmt(alloc)}):`, alloc);
         if(amtStr === null) return;
         const amt = +amtStr;
-        if(isNaN(amt) || amt < 0){ await appAlert('请输入有效金额'); return; }
+        if(isNaN(amt) || amt < 0){ await appAlert(isEn() ? 'Please enter a valid amount' : '请输入有效金额'); return; }
         g.ledger[monthKey()] = amt;
         saveGoalsAndRender();
       });
@@ -2176,13 +2511,13 @@
 
   /* 月存款池变动（数字框 + 滑块 双向同步） */
   $('poolSave').addEventListener('input', () => {
-    const v = sanitizeNumberEl($('poolSave'), 0, 50000);
+    const v = sanitizeNumberEl($('poolSave'), 0, poolSaveMax());
     $('poolSaveRange').value = Math.min(v, +$('poolSaveRange').max);
     updateRangeFill($('poolSaveRange')); // BUG修复：程序化改 value 不会触发原生 input 事件,轨道渐变得手动刷新
     saveInputs();
     renderAllGoals();
   });
-  bindPasteSanitize($('poolSave'), 0, 50000);
+  bindPasteSanitize($('poolSave'), 0, poolSaveMax);
   $('poolSaveRange').addEventListener('input', () => {
     $('poolSave').value = $('poolSaveRange').value;
     saveInputs();
@@ -2199,10 +2534,10 @@
     $('scNumber').style.color = $('heroBig').style.color || '';
     $('scLabel').textContent = $('heroLabel').textContent;
     $('scDaily').textContent = $('dailyLine').textContent;
-    $('scDisposable').textContent = '¥' + $('disposable').textContent;
+    $('scDisposable').textContent = cur() + $('disposable').textContent;
     $('scRentRatio').textContent = income > 0 ? (rent/income*100).toFixed(0) + '%' : '--';
     const firstAnalysisRow = $('analysisBody').querySelector('.analysis-row:last-child span:last-child');
-    $('scConclusion').innerHTML = firstAnalysisRow ? firstAnalysisRow.innerHTML : '先填一下收支再来分析';
+    $('scConclusion').innerHTML = firstAnalysisRow ? firstAnalysisRow.innerHTML : (isEn() ? 'Fill in income & expenses to see the analysis' : '先填一下收支再来分析');
 
     // 消费卡网格：把当前4张激活卡片的数量也放进分享图
     const activeIds = getActiveIds();
@@ -2211,7 +2546,8 @@
       if(!preset) return '';
       const price = effectivePrice(preset);
       const count = price > 0 ? Math.floor(disposable / price) : 0;
-      return `<div class="sc-mini-card"><span class="mc-ic">${preset.icon}</span><div class="mc-n">${fmtCount(count)}</div><div class="mc-l">${preset.unit}${preset.name.length>5?preset.name.slice(0,5)+'…':preset.name}</div></div>`;
+      const _pn = pName(preset);
+      return `<div class="sc-mini-card"><span class="mc-ic">${preset.icon}</span><div class="mc-n">${fmtCount(count)}</div><div class="mc-l">${pUnit(preset)}${_pn.length>5?_pn.slice(0,5)+'…':_pn}</div></div>`;
     }).join('');
 
     // 长期目标进度：取优先级最高（数字最小）的一个放进分享图
@@ -2220,7 +2556,9 @@
       const saved = goalTotalSaved(g);
       const pct = g.cost > 0 ? Math.min(100, Math.round(saved / g.cost * 100)) : 0;
       $('scGoalIcon').textContent = g.icon || '🎯';
-      $('scGoalName').textContent = `${g.name} · 已攒¥${fmt(saved)}/¥${fmt(g.cost)}`;
+      $('scGoalName').textContent = isEn()
+        ? `${g.name} · Saved ${cur()}${fmt(saved)}/${cur()}${fmt(g.cost)}`
+        : `${g.name} · 已攒${cur()}${fmt(saved)}/${cur()}${fmt(g.cost)}`;
       $('scGoalFill').style.width = pct + '%';
       $('scGoalPct').textContent = pct + '%';
       $('scGoalRow').style.display = 'flex';
@@ -2233,22 +2571,24 @@
     buildShareCard();
     $('shareModalMask').classList.add('show');
     $('shareModalBody').className = 'share-modal-loading';
-    $('shareModalBody').textContent = '正在生成分享图...';
+    $('shareModalBody').textContent = t('shareLoading');
     $('shareDownloadBtn').style.display = 'none';
 
     if(typeof html2canvas === 'undefined'){
-      $('shareModalBody').textContent = '分享图组件加载失败,请检查网络后重试(需要能访问 cdnjs.cloudflare.com)';
+      $('shareModalBody').textContent = isEn()
+        ? 'Failed to load the share component — please refresh the page and try again'
+        : '分享图组件加载失败,请刷新页面后重试';
       return;
     }
     // 给 DOM 一帧时间完成上面的赋值再截图
     requestAnimationFrame(() => {
       html2canvas($('shareCard'), {scale:2, backgroundColor:null}).then(canvas => {
         const url = canvas.toDataURL('image/png');
-        $('shareModalBody').innerHTML = `<img src="${url}" alt="分享图预览">`;
+        $('shareModalBody').innerHTML = `<img src="${url}" alt="${isEn()?'Share image preview':'分享图预览'}">`;
         $('shareDownloadBtn').href = url;
         $('shareDownloadBtn').style.display = 'inline-block';
       }).catch(() => {
-        $('shareModalBody').textContent = '生成失败,换个浏览器或稍后再试';
+        $('shareModalBody').textContent = isEn() ? 'Generation failed — try a different browser or try again later' : '生成失败,换个浏览器或稍后再试';
       });
     });
   });
@@ -2270,6 +2610,9 @@
   /* ============================================================
      Init
   ============================================================ */
+  $('langToggleBtn').addEventListener('click', () => { setLang(isEn() ? 'zh' : 'en'); });
+  applyStaticI18n();
+  applyLangLimits();
   loadInputs();
   initGoals();
   initCompareCols();
