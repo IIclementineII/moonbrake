@@ -526,40 +526,78 @@
 
   .share-offscreen{ position:fixed; left:-9999px; top:0; z-index:-1; }
   .share-card{
-    width:420px; padding:36px 32px; box-sizing:border-box;
-    background: linear-gradient(160deg, #FBF8F1 0%, #F3E2D8 100%);
+    width:420px; padding:0; box-sizing:border-box;
+    border-radius:28px; overflow:hidden;
+    background:
+      radial-gradient(circle at 50% 8%, rgba(201,100,66,0.16), transparent 42%),
+      repeating-radial-gradient(circle at 0 0, rgba(201,100,66,0.05) 0, rgba(201,100,66,0.05) 1px, transparent 1px, transparent 18px),
+      linear-gradient(165deg, #FCF9F3 0%, #F6E9DD 55%, #F0DBC9 100%);
     font-family: var(--font-cn); color: var(--ink);
+    position:relative;
   }
-  .share-card .sc-brand{ font-family: var(--font-serif); font-size:15px; font-weight:600; color: var(--ink-soft); margin-bottom:22px; }
-  .share-card .sc-number{ font-family: var(--font-serif); font-weight:600; font-size:74px; line-height:1; color: var(--clay); text-align:center; }
-  .share-card .sc-label{ text-align:center; font-size:14px; color: var(--ink); margin-top:8px; font-weight:500; }
-  .share-card .sc-daily{ text-align:center; font-size:12px; color: var(--ink-faint); margin-top:6px; }
+  .share-card .sc-inner{ padding:38px 32px 30px; position:relative; }
+  .share-card .sc-brand-row{ display:flex; align-items:center; justify-content:center; gap:8px; margin-bottom:26px; }
+  .share-card .sc-brand-badge{
+    width:26px; height:26px; border-radius:50%; background: var(--clay);
+    display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0;
+    box-shadow: 0 2px 6px rgba(201,100,66,0.35);
+  }
+  .share-card .sc-brand{ font-family: var(--font-serif); font-size:15px; font-weight:600; color: var(--ink-soft); letter-spacing:0.02em; }
+  .share-card .sc-number-wrap{ position:relative; text-align:center; padding:6px 0 2px; }
+  .share-card .sc-number-glow{
+    position:absolute; left:50%; top:50%; width:200px; height:200px;
+    transform:translate(-50%,-50%); border-radius:50%;
+    background: radial-gradient(circle, rgba(201,100,66,0.22), transparent 68%);
+  }
+  .share-card .sc-number{
+    position:relative; font-family: var(--font-serif); font-weight:600; font-size:76px; line-height:1;
+    color: var(--clay); text-align:center;
+  }
+  .share-card .sc-label{ text-align:center; font-size:14px; color: var(--ink); margin-top:10px; font-weight:600; }
+  .share-card .sc-daily{ text-align:center; font-size:12px; color: var(--ink-faint); margin-top:5px; }
   .share-card .sc-conclusion-box{
-    margin-top:20px; background: rgba(201,100,66,0.10); border:1px solid var(--clay-soft);
-    border-radius:12px; padding:16px 18px; font-size:14.5px; line-height:1.65; text-align:center;
+    margin-top:22px; background: rgba(255,255,255,0.72); border:1px solid rgba(201,100,66,0.22);
+    box-shadow: 0 4px 16px rgba(201,100,66,0.08);
+    border-radius:16px; padding:17px 19px; font-size:14.5px; line-height:1.65; text-align:center;
     color: var(--ink); font-weight:500;
   }
   .share-card .sc-conclusion-box b{ color: var(--clay); font-family: var(--font-num); }
-  .share-card .sc-divider{ border-top:1px dashed var(--clay-soft); margin:22px 0; }
-  .share-card .sc-row{ display:flex; justify-content:space-between; font-size:12.5px; color:var(--ink); padding:6px 0; line-height:1.6; }
-  .share-card .sc-row b{ color: var(--clay); font-family: var(--font-num); }
-  .share-card .sc-footer{ text-align:center; font-size:11px; color: var(--ink-faint); margin-top:24px; }
-  .share-card .sc-cards-grid{ display:grid; grid-template-columns: repeat(4,1fr); gap:8px; margin-top:16px; }
-  .share-card .sc-mini-card{
-    background:#fff; border:1px solid var(--border); border-radius:10px; padding:10px 4px; text-align:center;
+  .share-card .sc-divider{
+    height:1px; margin:24px 0; border:none;
+    background: repeating-linear-gradient(to right, var(--clay-soft) 0, var(--clay-soft) 5px, transparent 5px, transparent 11px);
+    opacity:0.7;
   }
-  .share-card .sc-mini-card .mc-ic{ font-size:16px; display:block; margin-bottom:4px; }
-  .share-card .sc-mini-card .mc-n{ font-family: var(--font-num); font-size:17px; font-weight:700; color: var(--ink); line-height:1; }
-  .share-card .sc-mini-card .mc-l{ font-size:9.5px; color: var(--ink-faint); margin-top:3px; }
+  .share-card .sc-stat-pair{ display:flex; gap:10px; }
+  .share-card .sc-stat-box{
+    flex:1; background: rgba(255,255,255,0.65); border:1px solid var(--border); border-radius:12px;
+    padding:11px 12px; text-align:center;
+  }
+  .share-card .sc-stat-box .stat-label{ font-size:11px; color: var(--ink-faint); margin-bottom:4px; }
+  .share-card .sc-stat-box .stat-value{ font-family: var(--font-num); font-size:17px; font-weight:700; color: var(--clay); }
+  .share-card .sc-footer-row{ display:flex; align-items:center; justify-content:center; gap:6px; margin-top:26px; }
+  .share-card .sc-footer{ text-align:center; font-size:11px; color: var(--ink-faint); }
+  .share-card .sc-url{
+    text-align:center; font-size:11px; color: var(--clay); font-weight:600; margin-top:4px;
+    font-family: var(--font-num); letter-spacing:0.02em;
+  }
+  .share-card .sc-cards-grid{ display:grid; grid-template-columns: repeat(4,1fr); gap:8px; margin-top:18px; }
+  .share-card .sc-mini-card{
+    background:rgba(255,255,255,0.78); border:1px solid var(--border); border-radius:12px; padding:11px 4px; text-align:center;
+    box-shadow: 0 2px 8px rgba(61,57,41,0.04);
+  }
+  .share-card .sc-mini-card .mc-ic{ font-size:17px; display:block; margin-bottom:5px; }
+  .share-card .sc-mini-card .mc-n{ font-family: var(--font-num); font-size:18px; font-weight:700; color: var(--ink); line-height:1; }
+  .share-card .sc-mini-card .mc-l{ font-size:9.5px; color: var(--ink-faint); margin-top:4px; }
   .share-card .sc-goal-row{
-    display:flex; align-items:center; gap:10px; margin-top:16px; background:#fff;
-    border:1px solid var(--border); border-radius:12px; padding:12px 14px;
+    display:flex; align-items:center; gap:10px; margin-top:16px; background:rgba(255,255,255,0.78);
+    border:1px solid var(--border); border-radius:14px; padding:13px 15px;
+    box-shadow: 0 2px 8px rgba(61,57,41,0.04);
   }
   .share-card .sc-goal-row .sg-ic{ font-size:20px; flex-shrink:0; }
   .share-card .sc-goal-row .sg-body{ flex:1; text-align:left; }
-  .share-card .sc-goal-row .sg-name{ font-size:12.5px; color: var(--ink); font-weight:600; margin-bottom:5px; }
+  .share-card .sc-goal-row .sg-name{ font-size:12.5px; color: var(--ink); font-weight:600; margin-bottom:6px; }
   .share-card .sc-goal-track{ height:6px; background: var(--border); border-radius:99px; overflow:hidden; }
-  .share-card .sc-goal-fill{ height:100%; background: var(--mint); border-radius:99px; }
+  .share-card .sc-goal-fill{ height:100%; background: linear-gradient(90deg, var(--mint), #5EC49A); border-radius:99px; }
   .share-card .sg-pct{ font-family: var(--font-num); font-size:13px; font-weight:700; color: var(--mint); flex-shrink:0; }
 
   .share-modal-mask{
@@ -878,24 +916,37 @@
 <!-- 分享卡（离屏渲染，用于截图） -->
 <div class="share-offscreen" id="shareOffscreen">
   <div class="share-card" id="shareCard">
-    <div class="sc-brand">🌙 月光减速器 Moonbrake</div>
-    <div class="sc-number" id="scNumber">0</div>
-    <div class="sc-label" id="scLabel">爽感指数</div>
-    <div class="sc-daily" id="scDaily">每日温饱线 ¥0 / 天</div>
-    <div class="sc-conclusion-box" id="scConclusionRow"><span id="scConclusion">先填一下收支再来分析</span></div>
-    <div class="sc-divider"></div>
-    <div class="sc-row"><span>本月可支配</span><b id="scDisposable">¥0</b></div>
-    <div class="sc-row"><span>房租占收入</span><b id="scRentRatio">0%</b></div>
-    <div class="sc-cards-grid" id="scCardsGrid"></div>
-    <div class="sc-goal-row" id="scGoalRow" style="display:none;">
-      <span class="sg-ic" id="scGoalIcon">🎯</span>
-      <div class="sg-body">
-        <div class="sg-name" id="scGoalName">长期目标</div>
-        <div class="sc-goal-track"><div class="sc-goal-fill" id="scGoalFill" style="width:0%"></div></div>
+    <div class="sc-inner">
+      <div class="sc-brand-row">
+        <span class="sc-brand-badge">🌙</span>
+        <span class="sc-brand">月光减速器 Moonbrake</span>
       </div>
-      <span class="sg-pct" id="scGoalPct">0%</span>
+      <div class="sc-number-wrap">
+        <div class="sc-number-glow"></div>
+        <div class="sc-number" id="scNumber">0</div>
+      </div>
+      <div class="sc-label" id="scLabel">爽感指数</div>
+      <div class="sc-daily" id="scDaily">每日温饱线 ¥0 / 天</div>
+      <div class="sc-conclusion-box" id="scConclusionRow">💡 <span id="scConclusion">先填一下收支再来分析</span></div>
+      <div class="sc-divider"></div>
+      <div class="sc-stat-pair">
+        <div class="sc-stat-box"><div class="stat-label" id="scDisposableLabel">本月可支配</div><div class="stat-value" id="scDisposable">¥0</div></div>
+        <div class="sc-stat-box"><div class="stat-label" id="scRentRatioLabel">房租占收入</div><div class="stat-value" id="scRentRatio">0%</div></div>
+      </div>
+      <div class="sc-cards-grid" id="scCardsGrid"></div>
+      <div class="sc-goal-row" id="scGoalRow" style="display:none;">
+        <span class="sg-ic" id="scGoalIcon">🎯</span>
+        <div class="sg-body">
+          <div class="sg-name" id="scGoalName">长期目标</div>
+          <div class="sc-goal-track"><div class="sc-goal-fill" id="scGoalFill" style="width:0%"></div></div>
+        </div>
+        <span class="sg-pct" id="scGoalPct">0%</span>
+      </div>
+      <div class="sc-footer-row">
+        <div class="sc-footer" id="scFooter">月光减速器 Moonbrake · 这个月这点钱,能吃什么玩什么?</div>
+      </div>
+      <div class="sc-url">moonbrake.vercel.app</div>
     </div>
-    <div class="sc-footer" id="scFooter">月光减速器 Moonbrake · 这个月这点钱,能吃什么玩什么?</div>
   </div>
 </div>
 
@@ -2536,6 +2587,8 @@
     $('scDaily').textContent = $('dailyLine').textContent;
     $('scDisposable').textContent = cur() + $('disposable').textContent;
     $('scRentRatio').textContent = income > 0 ? (rent/income*100).toFixed(0) + '%' : '--';
+    $('scDisposableLabel').textContent = isEn() ? 'Disposable this month' : '本月可支配';
+    $('scRentRatioLabel').textContent = isEn() ? 'Rent / income' : '房租占收入';
     const firstAnalysisRow = $('analysisBody').querySelector('.analysis-row:last-child span:last-child');
     $('scConclusion').innerHTML = firstAnalysisRow ? firstAnalysisRow.innerHTML : (isEn() ? 'Fill in income & expenses to see the analysis' : '先填一下收支再来分析');
 
