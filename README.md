@@ -16,7 +16,8 @@
 ---
 
 <div align="center">
-  <img src="preview.png" alt="Moonbrake Preview" width="600">
+  <img src="preview1.png" alt="Moonbrake Preview" width="600">
+  <img src="preview2.png" alt="Moonbrake Preview" width="600">
 </div>
 
 ## 🇨🇳 <a id="项目介绍"></a>项目介绍
